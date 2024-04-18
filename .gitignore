@@ -4,5 +4,4 @@ venv/
 .DS_Store
 
 # Dataset Files
-Dataset/
-Dataset.zip
+data/
