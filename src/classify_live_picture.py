@@ -99,10 +99,11 @@ def recognize_asl_signs(
             points[i][1] = (points[i][1] - min_y) / (max_y - min_y)
 
         points = np.expand_dims(points, axis=0)
-        prediction = model.predict(points)
-        prediction = ops.argmax(prediction, -1)
+        predictions = model.predict(points)
+        prediction = ops.argmax(predictions, -1)
         letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         letter = letters[prediction[0]]
+        probability = predictions[0][prediction[0]]
 
         annotated_image = np.copy(image)
         height, width, _ = annotated_image.shape
@@ -110,7 +111,7 @@ def recognize_asl_signs(
         text_y = int(hand[0].y * height) + 50
         cv2.putText(
             img=annotated_image,
-            text=letter,
+            text=f"{letter} {round(probability * 100 * 100) / 100}%",
             org=(text_x, text_y),
             fontFace=cv2.FONT_HERSHEY_PLAIN,
             fontScale=5,
@@ -125,7 +126,7 @@ def recognize_asl_signs(
 
 
 def main():
-    model = tf.keras.models.load_model("../model.keras")
+    model = tf.keras.models.load_model("../model_100.keras")
     # print(model.summary())
     hand_landmarker = Landmarker()
     cap = cv2.VideoCapture(1)
