@@ -5,6 +5,8 @@
 - Potential issues could be bias in the dataset, overfitting on training, or compression and issues in the image taking process.
 - After looking into it further, I realized the dataset was just 80,000 images that were extremely similar: minor changes from picture to picture, and it lacked varying backgrounds, skin tones, and hand sizes.
 - Found an alternative dataset on Kaggle that had varying backgrounds, albeit it was smaller, This was my new default dataset.
+<img width="620" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/5acb72b9-f1d6-46ea-b0b9-b31ea63ab7fd">
+
 
 ## Saturday, April 13th
 
@@ -28,6 +30,8 @@
 ## Wednesday, April 17th
 
 - I converted the entire dataset into numpy arrays of the hand landmarks in ASL and Chem class (morning half). I standardized every handlandmark to ensure that each point was relative to the leftmost, topmost, rightmost, and bottommost points of the hand. This ensures that the distance from the camera doesn't have too much of an effect on the model. Sizes of hands will still be an issue though.
+<img width="682" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c054850b-9f48-4d4d-be4a-d202fc9aded1">
+
 - However, I still had no idea how to train PointNet on the new dataset
 - Eventually, after school, I stumbled across this article about [Point Cloud Classification with PointNet](https://keras.io/examples/vision/pointnet/)
 - I used a similar approach to train the data on the numpy arrays of ASL alphabet hand landmarks. However, still being new to how most of this works, I decided that the shuffling step was unnecessary and decided to skip it. This was a mistake, as the model was not learning anything and had an accuracy of 0 the entire time.
