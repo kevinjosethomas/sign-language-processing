@@ -62,3 +62,8 @@
   - Many of these issues are because the model is trained on both left and right handed images. It might be a good idea to separate my datasets and make two separate models: one for the left hand and one for the right hand. MediaPipe classifies hands into left and right which should make this possible. By doing this, when the model sees a hand, I can use MediaPipe to identify which hand it is, and then use the corresponding model to predict the sign.
   - Furthermore, I can also add more training data for the model to be more accurate. I can combine a few Kaggle datasets to get a larger dataset.
   - I also made the mistake of not testing the model on many other people before demoing to my ASL teacher. While the MediaPipe hand landmark detection has always worked immediately for me, it often struggled for my ASL teacher and some of the other students in the class. My local version of MediaPipe also doesn't identify the crossed fingers when I sign the letter R, but the online MediaPipe Studio version does. There must be a difference in the models that I need to investigate.
+  - Next steps are as follows:
+    - Download more datasets and import them into the model
+    - Separate the dataset into left and right hands, and train two separate models
+    - Once the model is sufficiently accurate, figure out how to make it transcribe letters instead of just detecting letters
+    - Connect the transcription to a text-to-speech interface
