@@ -1,47 +1,64 @@
+
+## Saturday, April 6th
+- After a few days of watching 3blue1brown videos about neural networks and LLMs, I was looking for avenues where I could try out some existing models and practice my learnings in real life
+- I analyzed dozens of Kaggle datasets to try to identify a topic that I was passionate about. I looked into everything: [finding correlations between social media mentions of tickers and their stock prices](https://www.kaggle.com/datasets/justinmiller/reddit-pennystock-data) (a similar idea to a freelance project I took up years ago), [finding correlations between tweet locations and results in the 2020 elections](https://www.kaggle.com/datasets/manchunhui/us-election-2020-tweets), [image segmentation of satellite images of cities to determine building density](https://www.kaggle.com/datasets/aletbm/urban-segmentation-isprs) (related to my AP Seminar IRR), and even [segmentation of images of feet](https://www.kaggle.com/datasets/tapakah68/legs-segmentation)!
+<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/88af08bf-36a3-4a69-a803-ef9d63ac89fb">
+
+
 ## Sunday, April 7th
 
-- Finished training my first image classification model on the ASL dataset.
-- Although having a great validation accuracy, it barely worked for 10% of the images I tested it on in real time.
-- Potential issues could be bias in the dataset, overfitting on training, or compression and issues in the image taking process.
-- After looking into it further, I realized the dataset was just 80,000 images that were extremely similar: minor changes from picture to picture, and it lacked varying backgrounds, skin tones, and hand sizes.
-- Found an alternative dataset on Kaggle that had varying backgrounds, albeit it was smaller, This was my new default dataset.
+- On Sunday, I hopped on a call with my friend who is experienced in image segmentation and neural network research to get some advice regarding projects I should take up. While going through Kaggle datasets, I stumbled upon [a collection of ASL alphabets](https://www.kaggle.com/datasets/grassknoted/asl-alphabet). Since I started taking ASL in Grade 9, I have always been interested in developing accessibility technology for Deaf students in my school.
+- Looking into it further, I realized it would be the perfect opportunity to look through existing research and learn more about image classification and neural networks
+- I looked through existing Kaggle notebooks and could see all the theory I learned from 3b1b videos in practice. I gained a better understanding of layers, epochs and batches. I learned a lot of fundamental concepts like training, validation and testing.
+- Later that evening, I finished training my first image classification model on the same ASL dataset
+- Although having great validation accuracy, it barely worked for 10% of the trials of my own hands
+- Potential issues could be bias in the dataset, overfitting on training, or compression and issues in the image-capture process.
+- After looking into it further, I realized the dataset was just 80,000 images that were extremely similar; there were minor changes from picture to picture, but it lacked varying backgrounds, skin tones, and hand sizes.
+<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/5acb72b9-f1d6-46ea-b0b9-b31ea63ab7fd">
+
+- I found an [alternative dataset](https://www.kaggle.com/datasets/lexset/synthetic-asl-alphabet) on Kaggle that had varying backgrounds, albeit it was smaller, This was my new default dataset.
+
 
 ## Saturday, April 13th
 
-- After hours of training, I tested the ASL ResNet model on individual webcam images
-- The model was still pretty inaccurate.
+- Once again, I looked through existing notebooks and developed a better understanding of how image classification and convolutional neural networks worked
+- After hours of training, the first model was complete, and I tested it once again. However, the model was still pretty inaccurate
 
 ## Monday, April 15th
 
-- Although it was trained on a dataset with varying backgrounds and had over 95+ accuracy, it failed to detect most of the alphabets I showed it
-- I realized I was messing up on the process of taking and compressing pictures on Google Colab before feeding it into the model, but the model was still pretty innaccurate after I made the changes
-- The issue is most likely due to the fact that the model was trained on a dataset where the skin tone was primarily lighter, and the lighting was more consistent. Its possible that the model is overfit as well, because it works very well on all validation images. I need to find a way to make the model more robust. Maybe a larger dataset will help.
-- Discovered MediaPipe later in the night before going to bed
+- Although it was trained on a dataset with varying backgrounds and had over 95%+ accuracy, it failed to detect most of the alphabets I showed it
+- After lots of testing during math club and my badminton team's practice session, I realized I had messed up the process of taking and compressing pictures on Google Colab. However, the model was still pretty inaccurate after I fixed the issues
+- The issue is most likely because the model was trained on a dataset where the skin tone was primarily lighter, and the lighting was more consistent. It is also highly likely that the model is overfit as well, because it works very well on all validation images. I need to find a way to make the model more robust. Maybe a larger dataset will help.
+- I discovered MediaPipe later in the night before going to bed
 
 ## Tuesday, April 16th
 
-- My initial plan was to use MediaPipe on the entire training dataset and generate new IMAGES of just the landmarks of each hand
-- After further research, I realized an image classification model was probably not the most efficient way to do live translation in the first place. Until now I had only looked into classifying one image at a time, but MediaPipe made it so live translation would be possible.
-- By simply dealing with the coordinates of the landmarks, I could create a translator that works very effectively in a realtime setting.
-- After further research, I learned about PointNet.
+- My initial plan was to use MediaPipe on the entire training dataset and generate new IMAGES of just the landmarks of each hand. I would then train an image classification model of just these images. To recognize signs in realtime, I would use MediaPipe and generate a new image of just the hand landmarks of the individual and feed it into the CNN model.
+- I augmented all the training data to only be visualizations of the landmarks, and was getting ready to train an image classification model on them
+<img width="1651" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/b38ee17c-aa14-4a3b-bf7b-b912b7bc19a1">
+
+- After further research, I realized an image classification model was probably not the most efficient way to do live translation in the first place. I would probably have to create new images of hand landmarks for every frame in a realtime sample, and classify each frame in realtime. This would be incredibly resource intensive and laggy, and most likely not work accurately as well. Until now I had only looked into classifying one image at a time, but MediaPipe made it so live translation would be possible. Regardless, if I couldn't figure out a better solution, I would settle with image classification of the landmarks so I could at least develop a model that was better than the current dysfunctional models.
+- After further research, I learned about PointNet. By simply dealing with the coordinates of the landmarks, I could create a translator that works very effectively in a realtime setting. And since it only works with three-dimensional arrays of 21 points, it would be much more efficient.
 
 ## Wednesday, April 17th
 
-- I converted the entire dataset into numpy arrays of the hand landmarks in ASL and Chem class (morning half). I standardized every handlandmark to ensure that each point was relative to the leftmost, topmost, rightmost, and bottommost points of the hand. This ensures that the distance from the camera doesn't have too much of an effect on the model. Sizes of hands will still be an issue though.
-- However, I still had no idea how to train PointNet on the new dataset
+- During ASL and Chem class, I converted the entire dataset into numpy arrays of the hand landmarks in ASL and Chem class. I standardized every hand landmark to ensure that each point was relative to the leftmost, topmost, rightmost, and bottommost points of the hand. This ensures that the distance from the camera doesn't have too much of an effect on the model. Essentially, if a hand is far from the camera (which leads to a smaller hand landmark), it will be treated the same as a hand that is right in front of the camera. However, varying sizes of hands will still be an issue. (I notice this later when I demo this project to my ASL teacher and it struggles to detect the hands of many other students)
+<img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c054850b-9f48-4d4d-be4a-d202fc9aded1">
+
+- However, even after converting the dataset to points, I still had no idea how to train PointNet on the new dataset
 - Eventually, after school, I stumbled across this article about [Point Cloud Classification with PointNet](https://keras.io/examples/vision/pointnet/)
-- I used a similar approach to train the data on the numpy arrays of ASL alphabet hand landmarks. However, still being new to how most of this works, I decided that the shuffling step was unnecessary and decided to skip it. This was a mistake, as the model was not learning anything and had an accuracy of 0 the entire time.
-- Not knowing what to do, I went back to creating a hand landmark image version of the dataset so I could use an image classification model instead of PointNet. When implementing this, I realized the importance of shuffling and went back to the PointNet model to try again. It worked!
+- I used a similar approach to train the data on the numpy arrays of ASL alphabet hand landmarks. However, still being new to how most of this works, I decided that the shuffling step was unnecessary and decided to skip it 💀 This was a mistake, as the model was not learning anything and had an accuracy of 0 the entire time.
+- Not knowing what the issue was, I went back to trying to create an image classification model of the hand landmarks instead of using PointNet. When implementing this, I realized the importance of shuffling and went back to the PointNet model to try again. It worked!
 - I trained the model on the ASL dataset for 20 epochs with a learning rate of 0.001. It worked pretty well when I tested it on some individual images.
 - I setup a local live webcam stream with MediaPipe and the PointNet model to test the model on live data. It worked really really well! However, the model was still not perfect. It got many signs confused (A-S-T-M-N, C-E, G-H, V-W, etc.).
 - I left it training for 100 epochs with a learning rate of 0.0001 overnight.
 
 ## Thursday, April 18th
 
-- Watched many videos about layers in neural networks and how the Adam optimization function worked.
-- Started documenting the development process and pushed most of the code to GitHub.
-- Developed new plots of the three different models I tested (CNN, ResNet, PointNet) for future documentation and reference.
-- Demoed the project to my CS teacher:
+- I watched many videos about layers in neural networks and how the Adam optimization function worked (English class was boring)
+- Started documenting the development process and pushed most of the code to GitHub
+- Developed new plots of the three different models I tested earlier (CNN, ResNet, PointNet) for future documentation and reference.
+- Demoed the prototype to my CS teacher, received the following feedback:
   - I should work more closely with BCSD and ASL teachers in my school as I continue on this project
   - I should also find a mentor and look into grants to help continue this project
 
