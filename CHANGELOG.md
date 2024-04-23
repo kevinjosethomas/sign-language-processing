@@ -2,7 +2,8 @@
 
 - After a few days of watching 3blue1brown videos about neural networks and LLMs, I was looking for avenues where I could try out some existing models and practice my learnings in real life
 - I analyzed dozens of Kaggle datasets to try to identify a topic that I was passionate about. I looked into everything: [finding correlations between social media mentions of tickers and their stock prices](https://www.kaggle.com/datasets/justinmiller/reddit-pennystock-data) (a similar idea to a freelance project I took up years ago), [finding correlations between tweet locations and results in the 2020 elections](https://www.kaggle.com/datasets/manchunhui/us-election-2020-tweets), [image segmentation of satellite images of cities to determine building density](https://www.kaggle.com/datasets/aletbm/urban-segmentation-isprs) (related to my AP Seminar IRR), and even [segmentation of images of feet](https://www.kaggle.com/datasets/tapakah68/legs-segmentation)!
-  <img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/88af08bf-36a3-4a69-a803-ef9d63ac89fb">
+
+<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/88af08bf-36a3-4a69-a803-ef9d63ac89fb">
 
 ## Sunday, April 7th
 
@@ -13,7 +14,8 @@
 - Although having great validation accuracy, it barely worked for 10% of the trials of my own hands
 - Potential issues could be bias in the dataset, overfitting on training, or compression and issues in the image-capture process.
 - After looking into it further, I realized the dataset was just 80,000 images that were extremely similar; there were minor changes from picture to picture, but it lacked varying backgrounds, skin tones, and hand sizes.
-  <img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/5acb72b9-f1d6-46ea-b0b9-b31ea63ab7fd">
+
+<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/5acb72b9-f1d6-46ea-b0b9-b31ea63ab7fd">
 
 - I found an [alternative dataset](https://www.kaggle.com/datasets/lexset/synthetic-asl-alphabet) on Kaggle that had varying backgrounds, albeit it was smaller, This was my new default dataset.
 
@@ -33,7 +35,8 @@
 
 - My initial plan was to use MediaPipe on the entire training dataset and generate new IMAGES of just the landmarks of each hand. I would then train an image classification model of just these images. To recognize signs in realtime, I would use MediaPipe and generate a new image of just the hand landmarks of the individual and feed it into the CNN model.
 - I augmented all the training data to only be visualizations of the landmarks, and was getting ready to train an image classification model on them
-  <img width="1651" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/b38ee17c-aa14-4a3b-bf7b-b912b7bc19a1">
+
+<img width="1651" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/b38ee17c-aa14-4a3b-bf7b-b912b7bc19a1">
 
 - After further research, I realized an image classification model was probably not the most efficient way to do live translation in the first place. I would probably have to create new images of hand landmarks for every frame in a realtime sample, and classify each frame in realtime. This would be incredibly resource intensive and laggy, and most likely not work accurately as well. Until now I had only looked into classifying one image at a time, but MediaPipe made it so live translation would be possible. Regardless, if I couldn't figure out a better solution, I would settle with image classification of the landmarks so I could at least develop a model that was better than the current dysfunctional models.
 - After further research, I learned about PointNet. By simply dealing with the coordinates of the landmarks, I could create a translator that works very effectively in a realtime setting. And since it only works with three-dimensional arrays of 21 points, it would be much more efficient.
@@ -41,7 +44,8 @@
 ## Wednesday, April 17th
 
 - During ASL and Chem class, I converted the entire dataset into numpy arrays of the hand landmarks in ASL and Chem class. I standardized every hand landmark to ensure that each point was relative to the leftmost, topmost, rightmost, and bottommost points of the hand. This ensures that the distance from the camera doesn't have too much of an effect on the model. Essentially, if a hand is far from the camera (which leads to a smaller hand landmark), it will be treated the same as a hand that is right in front of the camera. However, varying sizes of hands will still be an issue. (I notice this later when I demo this project to my ASL teacher and it struggles to detect the hands of many other students)
-  <img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c054850b-9f48-4d4d-be4a-d202fc9aded1">
+
+<img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c054850b-9f48-4d4d-be4a-d202fc9aded1">
 
 - However, even after converting the dataset to points, I still had no idea how to train PointNet on the new dataset
 - Eventually, after school, I stumbled across this article about [Point Cloud Classification with PointNet](https://keras.io/examples/vision/pointnet/)
@@ -86,4 +90,8 @@
 ## Monday, April 22nd
 
 - Separated datasets into left/right folders for two separate models
-- Downloaded two more datasets and added them to the data: [One](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test) [Two](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
+- Downloaded two more datasets and added them to the data: [First](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test) [Second](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
+
+<img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/04ea130b-e20e-469f-8d1d-663fdb97136c">
+
+
