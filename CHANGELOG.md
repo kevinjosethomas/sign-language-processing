@@ -89,9 +89,9 @@
 
 ## Monday, April 22nd
 
+- Reworked the MediaPipe integration to be more seamless, fixed the prior issues of it not detecting all people
+- Made the hand landmarks more visible
 - Separated datasets into left/right folders for two separate models
 - Downloaded two more datasets and added them to the data: [First](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test) [Second](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
 
-<img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/04ea130b-e20e-469f-8d1d-663fdb97136c">
-
-
+<img width="300" alt="Converting Signs to Points 3" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/04ea130b-e20e-469f-8d1d-663fdb97136c">
