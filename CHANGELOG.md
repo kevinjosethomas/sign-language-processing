@@ -93,5 +93,7 @@
 - Downloaded two more datasets and added them to the data: [First](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test) [Second](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
 
 <img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/04ea130b-e20e-469f-8d1d-663fdb97136c">
+<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/6a3a5291-5ef0-46ca-9e53-b751fa6b0bef">
+
 
 
