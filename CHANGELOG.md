@@ -101,3 +101,12 @@
 
 <img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3293ec61-eb12-44bf-8064-f3bde286cd72">
 <img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/d642424b-72e9-41fa-af36-55031e4ed7ce">
+
+## Tuesday, April 23rd
+
+- So.... turns out I wasn't actually saving the numpy arrays into files when I parsed the 200,000 image dataset. Which is why I still only had 20,000 files after converting the images into vectors 💀
+- So I'm in ASL class and I'm augmenting all three image datasets into points once again. This time I'm not separating them between left and right hands.
+
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/7f8cbb97-3638-4dc2-82a2-11156a146d5c">
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/d8aba9b7-111f-4449-a7a9-d75cb6186ed0">
+
