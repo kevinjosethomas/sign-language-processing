@@ -23,18 +23,15 @@ def vectorize_image(image_path: str):
 
     image = mp.Image.create_from_file(image_path)
     results = detector.detect(image)
-    if not results.handedness:
-        return
-    handedness = results.handedness[0][0].category_name.lower()
 
-    new_path = f"../data/dataset/{handedness}/train/{alphabet}/{uuid.uuid4().hex[:8]}"
-
-    return
-
-    points = []
+    # handedness = results.handedness[0][0].category_name.lower()
 
     if not results.hand_landmarks:
-        return image_path
+        return 1
+
+    new_path = f"../data/merged/{alphabet}/{uuid.uuid4().hex[:8]}"
+
+    points = []
 
     for landmark in results.hand_landmarks[0]:
         points.append([landmark.x, landmark.y, landmark.z])
@@ -62,9 +59,17 @@ def start():
     progress_bar = tqdm(total=len(files))
     progress_bar.set_description("Vectorizing Dataset")
 
-    for i, file in enumerate(files):
-        vectorize_image(file)
+    failed_count = 0
+    for file in files:
+        failed = vectorize_image(file)
+        if failed:
+            failed_count += 1
+
+        if failed_count % 1000 == 0 and failed_count > 1000:
+            print(f"Failed Vectorization: {failed_count} Images")
         progress_bar.update(1)
+
+    print("Failed Vectorization: ", failed_count)
 
 
 if __name__ == "__main__":

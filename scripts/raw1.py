@@ -1,6 +1,5 @@
-import os
 import glob
-import json
+import uuid
 import numpy as np
 from tqdm import tqdm
 import mediapipe as mp
@@ -13,24 +12,21 @@ options = vision.HandLandmarkerOptions(base_options=base_options, num_hands=1)
 detector = vision.HandLandmarker.create_from_options(options)
 
 
-def vectorize_image(image_path: str, index: int):
+def vectorize_image(image_path: str):
     original_path_split = image_path.split("/")
 
     alphabet = original_path_split[-2]
 
-    if alphabet == "J" or alphabet == "Z":
+    letters = "ABCDEFGHIKLMNOPQRSTUVWXY"
+    if alphabet not in letters:
         return
-
-    category = original_path_split[-3]
 
     image = mp.Image.create_from_file(image_path)
     results = detector.detect(image)
-    if not results.handedness:
-        return
 
-    handedness = results.handedness[0][0].category_name.lower()
+    # handedness = results.handedness[0][0].category_name.lower()
 
-    new_path = f"../data/dataset/{handedness}/{category}/{alphabet}/{index}"
+    new_path = f"../data/merged/{alphabet}/{uuid.uuid4().hex[:8]}"
 
     points = []
 
@@ -63,9 +59,17 @@ def start():
     progress_bar = tqdm(total=len(files))
     progress_bar.set_description("Vectorizing Dataset")
 
-    for i, file in enumerate(files):
-        vectorize_image(file, i + 1)
+    failed_count = 0
+    for file in files:
+        failed = vectorize_image(file)
+        if failed:
+            failed_count += 1
+
+        if failed_count % 1000 == 0 and failed_count > 1000:
+            print(f"Failed Vectorization: {failed_count} Images")
         progress_bar.update(1)
+
+    print("Failed Vectorization: ", failed_count)
 
 
 if __name__ == "__main__":
