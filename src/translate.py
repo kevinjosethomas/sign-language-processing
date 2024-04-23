@@ -8,7 +8,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
-model = tf.keras.models.load_model("../model_100.keras")
+model = tf.keras.models.load_model("../model.keras")
 
 
 def main():
@@ -71,7 +71,7 @@ def main():
                 points = np.expand_dims(points, axis=0)
                 predictions = model.predict(points, verbose=0)
                 prediction = ops.argmax(predictions, -1)
-                letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                letters = "ABCDEFGHIKLMNOPQRSTUVWXY"
                 letter = letters[prediction[0]]
                 probability = predictions[0][prediction[0]]
 
