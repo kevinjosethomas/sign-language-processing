@@ -106,7 +106,7 @@ def recognize_asl_signs(
         points = np.expand_dims(points, axis=0)
         predictions = model.predict(points, verbose=0)
         prediction = ops.argmax(predictions, -1)
-        letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        letters = "ABCDEFGHIKLMNOPQRSTUVWXY"
         letter = letters[prediction[0]]
         probability = predictions[0][prediction[0]]
 

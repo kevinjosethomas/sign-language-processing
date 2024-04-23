@@ -1,6 +1,5 @@
-import os
 import glob
-import json
+import uuid
 import numpy as np
 from tqdm import tqdm
 import mediapipe as mp
@@ -13,14 +12,22 @@ options = vision.HandLandmarkerOptions(base_options=base_options, num_hands=1)
 detector = vision.HandLandmarker.create_from_options(options)
 
 
-def vectorize_image(image_path: str, index: int):
+def vectorize_image(image_path: str):
     original_path_split = image_path.split("/")
-    new_path = (
-        "/".join(original_path_split[:-1]).replace("signs", "points") + "/" + f"{index}"
-    )
+
+    alphabet = original_path_split[-2]
+
+    letters = "ABCDEFGHIKLMNOPQRSTUVWXY"
+    if alphabet not in letters:
+        return
 
     image = mp.Image.create_from_file(image_path)
     results = detector.detect(image)
+    if not results.handedness:
+        return
+    handedness = results.handedness[0][0].category_name.lower()
+
+    new_path = f"../data/dataset/{handedness}/train/{alphabet}/{uuid.uuid4().hex[:8]}"
 
     points = []
 
@@ -45,23 +52,17 @@ def vectorize_image(image_path: str, index: int):
 
 def start():
     files = []
-    for file in glob.glob("../data/signs/**/*.png", recursive=True):
+    for file in glob.glob("../data/raw2/**/*.jpg", recursive=True):
         if "Blank" in file:
             continue
         files.append(file)
 
     progress_bar = tqdm(total=len(files))
     progress_bar.set_description("Vectorizing Dataset")
-    failed_images = []
 
     for i, file in enumerate(files):
-        failed = vectorize_image(file, i + 1)
-        if failed:
-            failed_images.append(failed)
+        vectorize_image(file)
         progress_bar.update(1)
-
-    with open("failed_images.txt", "w") as f:
-        json.dump(failed_images, f)
 
 
 if __name__ == "__main__":

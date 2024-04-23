@@ -1,6 +1,6 @@
 import os
 
-ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALPHABET = "ABCDEFGHIKLMNOPQRSTUVWXY"
 
 for letter in ALPHABET:
     os.makedirs(f"../data/dataset/left/test/{letter}", exist_ok=True)

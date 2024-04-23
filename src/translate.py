@@ -1,10 +1,14 @@
 import cv2
 import numpy as np
+from keras import ops
 import mediapipe as mp
+import tensorflow as tf
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
+
+model = tf.keras.models.load_model("../model_100.keras")
 
 
 def main():
@@ -22,6 +26,8 @@ def main():
             if not success:
                 print("Empty camera frame")
                 continue
+
+            # image = cv2.flip(image, 1)
 
             image.flags.writeable = False
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -45,6 +51,8 @@ def main():
                     )
 
                 hand = results.multi_hand_landmarks[0]
+                handedness = results.multi_handedness[0].classification[0].label.lower()
+                print(handedness)
 
                 points = []
                 for landmark in hand.landmark:
@@ -60,7 +68,28 @@ def main():
                     points[i][0] = (points[i][0] - min_x) / (max_x - min_x)
                     points[i][1] = (points[i][1] - min_y) / (max_y - min_y)
 
-            cv2.imshow("Translation", cv2.flip(image, 1))
+                points = np.expand_dims(points, axis=0)
+                predictions = model.predict(points, verbose=0)
+                prediction = ops.argmax(predictions, -1)
+                letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                letter = letters[prediction[0]]
+                probability = predictions[0][prediction[0]]
+
+                height, width, _ = image.shape
+                text_x = int(hand.landmark[0].x * width) - 100
+                text_y = int(hand.landmark[0].y * height) + 50
+                cv2.putText(
+                    img=image,
+                    text=f"{letter} {round(probability * 100 * 100) / 100}%",
+                    org=(text_x, text_y),
+                    fontFace=cv2.FONT_HERSHEY_PLAIN,
+                    fontScale=5,
+                    color=(0, 255, 0),
+                    thickness=4,
+                    lineType=cv2.LINE_4,
+                )
+
+            cv2.imshow("Translation", image)
             if cv2.waitKey(5) & 0xFF == 27:
                 break
 
