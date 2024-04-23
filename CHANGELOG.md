@@ -15,7 +15,7 @@
 - Potential issues could be bias in the dataset, overfitting on training, or compression and issues in the image-capture process.
 - After looking into it further, I realized the dataset was just 80,000 images that were extremely similar; there were minor changes from picture to picture, but it lacked varying backgrounds, skin tones, and hand sizes.
 
-<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/5acb72b9-f1d6-46ea-b0b9-b31ea63ab7fd">
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/5acb72b9-f1d6-46ea-b0b9-b31ea63ab7fd">
 
 - I found an [alternative dataset](https://www.kaggle.com/datasets/lexset/synthetic-asl-alphabet) on Kaggle that had varying backgrounds, albeit it was smaller, This was my new default dataset.
 
@@ -45,7 +45,7 @@
 
 - During ASL and Chem class, I converted the entire dataset into numpy arrays of the hand landmarks in ASL and Chem class. I standardized every hand landmark to ensure that each point was relative to the leftmost, topmost, rightmost, and bottommost points of the hand. This ensures that the distance from the camera doesn't have too much of an effect on the model. Essentially, if a hand is far from the camera (which leads to a smaller hand landmark), it will be treated the same as a hand that is right in front of the camera. However, varying sizes of hands will still be an issue. (I notice this later when I demo this project to my ASL teacher and it struggles to detect the hands of many other students)
 
-<img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c054850b-9f48-4d4d-be4a-d202fc9aded1">
+<img width="400" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c054850b-9f48-4d4d-be4a-d202fc9aded1">
 
 - However, even after converting the dataset to points, I still had no idea how to train PointNet on the new dataset
 - Eventually, after school, I stumbled across this article about [Point Cloud Classification with PointNet](https://keras.io/examples/vision/pointnet/)
@@ -92,8 +92,13 @@
 - Separated datasets into left/right folders for two separate models
 - Downloaded two more datasets and added them to the data: [First](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test) [Second](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
 
-<img width="300" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/04ea130b-e20e-469f-8d1d-663fdb97136c">
-<img width="300" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/6a3a5291-5ef0-46ca-9e53-b751fa6b0bef">
+<img width="400" alt="Converting Signs to Points 2" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/04ea130b-e20e-469f-8d1d-663fdb97136c">
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/6a3a5291-5ef0-46ca-9e53-b751fa6b0bef">
+
+- Then, I trained two separate models for the left and right hand respectively. I trained them both over 20 epochs with a learning rate of 0.001. For some reason, there seems to be an issue with the validation accuracy. Maybe there was too less test data considering I put all the new datasets into training data. Also, for some reason there were only around 20,000 files in my final dataset although it should be over 200,000 files. The new models are pretty inaccurate as well. Unsure what went wrong!
+
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3293ec61-eb12-44bf-8064-f3bde286cd72">
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/d642424b-72e9-41fa-af36-55031e4ed7ce">
 
 
 
