@@ -110,3 +110,14 @@
 <img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/7f8cbb97-3638-4dc2-82a2-11156a146d5c">
 <img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/d8aba9b7-111f-4449-a7a9-d75cb6186ed0">
 
+- With the new 150,000 point dataset, I trained the PointNet model. However, I was getting absurd validation loss, beyond the billions.
+- I tried again with a batch size of 128 instead of 256, and the validation loss was significantly better, albeit still a little too high
+
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1dcf5a4c-1e40-4672-b320-c80795344180">
+
+- I tried again with a batch size of 64, and the validation loss was even better, although still a little too high
+- This 20 Epoch, 64 Batch Size, 0.001 LR model is the most accurate model I have trained so far
+
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/0a9be99e-5ac1-4b2f-9baa-06284e755d5e">
+
+
