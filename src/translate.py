@@ -9,9 +9,12 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_hands = mp.solutions.hands
 
 model = tf.keras.models.load_model("../model.keras")
+transcription = [" "]
+detection = []
 
 
 def main():
+    global letters
     cap = cv2.VideoCapture(1)
 
     with mp_hands.Hands(
@@ -51,7 +54,7 @@ def main():
                     )
 
                 hand = results.multi_hand_landmarks[0]
-                handedness = results.multi_handedness[0].classification[0].label.lower()
+                # handedness = results.multi_handedness[0].classification[0].label.lower()
 
                 points = []
                 for landmark in hand.landmark:
@@ -74,7 +77,17 @@ def main():
                 letter = letters[prediction[0]]
                 probability = predictions[0][prediction[0]]
 
-                if probability > 0.6:
+                if probability > 0.8:
+                    detection.append(letter)
+
+                    if letter != transcription[-1]:
+                        last = set(detection[-5:])
+
+                        if len(last) == 1:
+                            if letter == last.pop():
+                                transcription.append(letter)
+                                print("".join(transcription))
+
                     height, width, _ = image.shape
                     text_x = int(hand.landmark[0].x * width) - 100
                     text_y = int(hand.landmark[0].y * height) + 50
@@ -88,6 +101,16 @@ def main():
                         thickness=4,
                         lineType=cv2.LINE_4,
                     )
+                else:
+                    detection.append(" ")
+
+                    if letter != transcription[-1]:
+                        last = set(detection[-5:])
+
+                        if len(last) == 1:
+                            if letter == last.pop():
+                                transcription.append(letter)
+                                print("".join(transcription))
 
             cv2.imshow("Translation", image)
             if cv2.waitKey(5) & 0xFF == 27:
@@ -96,3 +119,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # print(transcription)
