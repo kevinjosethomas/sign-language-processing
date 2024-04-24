@@ -52,7 +52,6 @@ def main():
 
                 hand = results.multi_hand_landmarks[0]
                 handedness = results.multi_handedness[0].classification[0].label.lower()
-                print(handedness)
 
                 points = []
                 for landmark in hand.landmark:
@@ -75,19 +74,20 @@ def main():
                 letter = letters[prediction[0]]
                 probability = predictions[0][prediction[0]]
 
-                height, width, _ = image.shape
-                text_x = int(hand.landmark[0].x * width) - 100
-                text_y = int(hand.landmark[0].y * height) + 50
-                cv2.putText(
-                    img=image,
-                    text=f"{letter} {round(probability * 100 * 100) / 100}%",
-                    org=(text_x, text_y),
-                    fontFace=cv2.FONT_HERSHEY_PLAIN,
-                    fontScale=5,
-                    color=(0, 255, 0),
-                    thickness=4,
-                    lineType=cv2.LINE_4,
-                )
+                if probability > 0.6:
+                    height, width, _ = image.shape
+                    text_x = int(hand.landmark[0].x * width) - 100
+                    text_y = int(hand.landmark[0].y * height) + 50
+                    cv2.putText(
+                        img=image,
+                        text=f"{letter} {round(probability * 100 * 100) / 100}%",
+                        org=(text_x, text_y),
+                        fontFace=cv2.FONT_HERSHEY_PLAIN,
+                        fontScale=5,
+                        color=(0, 255, 0),
+                        thickness=4,
+                        lineType=cv2.LINE_4,
+                    )
 
             cv2.imshow("Translation", image)
             if cv2.waitKey(5) & 0xFF == 27:
