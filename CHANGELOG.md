@@ -137,3 +137,7 @@
 
 ![image](https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/29508886-6f8c-4040-9fd5-22475e46816f)
 
+
+## Thursday, April 25th
+- Cleaned up the visualization of live transcription
+- Fixed the bug where text was deleted when sent to OpenAI for correction
