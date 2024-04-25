@@ -1,4 +1,6 @@
 
+*.env
+
 # Virtual Environment & OS
 venv/
 .DS_Store

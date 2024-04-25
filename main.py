@@ -1,8 +1,8 @@
 import os
 import cv2
-import time
 import threading
-from langchain_community.llms import Ollama
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
 
 from asl.landmarker import Landmarker
 from asl.classifier import Classifier
@@ -10,29 +10,63 @@ from asl.classifier import Classifier
 landmarker = Landmarker()
 classifier = Classifier()
 
-llm = Ollama(model="llama3")
-transcription = ""
+llm = ChatOpenAI(
+    model="gpt-4-turbo-preview",
+    openai_api_key=os.environ.get("OPENAI_API_KEY"),
+)
+
+# PROMPT = ChatPromptTemplate.from_messages(  # The alphabets that the software often gets confused between are: A, S, T, N and M; G and H; D and I; F and W; P and Q; R and U.
+#     [
+#         (
+#             "system",
+#             "You are an LLM meant to fix typos in the LAST word of given phrases. I will send you a "
+#             "phrase, please look at the LAST word and correct it if there are any typos. Make sure you change "
+#             "nothing but the last word. Do not add new letters. Only change existing letters. "
+#             "Please output nothing but the corrected phrase. No punctuation. Make sure everything is an English word"
+#             "or a proper noun. Make sure the phrase makes sense.",
+#         ),
+#         ("human", "{transcription}"),
+#     ]
+# )
+# chain = PROMPT | llm
+
+PROMPT = ChatPromptTemplate.from_messages(  # The alphabets that the software often gets confused between are: A, S, T, N and M; G and H; D and I; F and W; P and Q; R and U.
+    [
+        (
+            "system",
+            "You are an LLM meant to fix typos in given phrases. I will send you a "
+            "phrase, please correct it if there are any typos. These are the alphabets that are mistaken for each other the most often: A and S and T and N and M. G and H. D and I. F and W. P and Q. R and U. "
+            "Please output nothing but the corrected phrase. No punctuation. Make sure everything is an English word"
+            "or a proper noun. Make sure the phrase makes sense.",
+        ),
+        ("human", "{transcription}"),
+    ]
+)
+chain = PROMPT | llm
+
+transcription_current_word = ""
+ai_transcription_words = []
+transcription_words = []
+transcription_alphabet_log = []
 
 
 def fix_transcription():
-    global transcription
+    global transcription_words, transcription_current_word, transcription_alphabet_log, ai_transcription_words
 
-    previous = transcription
-    response = llm.invoke(
-        f"You are an LLM that corrects typos in words. I will keep sending you phrases, return the corrected sentence or word. Make sure your output is the corrected phrase WITH NO OTHER CONTENT. It should be exactly like the input but corrected. Do not precede or end it with any additional text. Here is the phrase: '{transcription}'"
+    transcription = " ".join(transcription_words)
+    response = chain.invoke(
+        {
+            "transcription": transcription,
+        }
     )
-    print(response.strip())
-    transcription = response.strip().upper() + " "
+
+    print(" ".join(transcription_words))
+    ai_transcription_words = response.content.strip().upper().split()
 
 
 def main():
-    global transcription
-    camera = cv2.VideoCapture(0)
-
-    start = time.time()
-    # os.system("clear")
-
-    transcription_log = []
+    global transcription_words, transcription_current_word, transcription_alphabet_log, ai_transcription_words
+    camera = cv2.VideoCapture(1)
 
     while camera.isOpened():
 
@@ -42,26 +76,32 @@ def main():
 
         success, image, points, first_landmark = landmarker.process(img)
 
-        if time.time() - start > 1 and success:
+        if success:
             letter, probability = classifier.classify(points)
-            transcription_log.append(letter)
+            transcription_alphabet_log.append(letter)
 
-            if probability > 0.90:
+            if probability > 0.80:
                 transcribed = False
 
-                longer_recent = set(transcription_log[-20:])
-                if len(longer_recent) == 1 and transcription[-2:] != letter * 2:
-                    transcription += letter
+                # 1. Ensure that the last 20 letters are the same
+                # 2. Ensure that it does not repeat the same character more than twice
+                longer_recent = set(transcription_alphabet_log[-20:])
+                if len(longer_recent) == 1 and (
+                    len(transcription_current_word) < 2
+                    or transcription_current_word[-2:] != letter * 2
+                ):
+                    transcription_current_word += letter
                     transcribed = True
                 else:
-                    recent = set(transcription_log[-4:])
+                    # Ensure that the last 4 letters are the same
+                    # Ensure that it does not repeat the same character more than once
+                    recent = set(transcription_alphabet_log[-4:])
                     if len(recent) == 1 and (
-                        not transcription or transcription[-1] != letter
+                        not transcription_current_word
+                        or transcription_current_word[-1] != letter
                     ):
-                        transcription += letter
+                        transcription_current_word += letter
                         transcribed = True
-
-                # os.system("clear")
 
                 height, width, _ = image.shape
                 text_x = int(first_landmark[0] * width) - 100
@@ -77,18 +117,27 @@ def main():
                     lineType=cv2.LINE_4,
                 )
         else:
-            if transcription and transcription[-1] != " ":
-                transcription += " "
+            if transcription_current_word:
+                transcription_words.append(transcription_current_word)
+                transcription_current_word = ""
 
                 new_thread = threading.Thread(target=fix_transcription)
                 new_thread.start()
 
-        size = cv2.getTextSize(transcription, cv2.FONT_HERSHEY_PLAIN, 1, 2)[0]
-        textX = int((img.shape[1] - size[0]) / 2)
+        output = (
+            " "
+            + (
+                " ".join(ai_transcription_words) + " " + transcription_current_word
+            ).strip()
+            + " "
+        )
+        text_width = cv2.getTextSize(output, cv2.FONT_HERSHEY_PLAIN, 5, 8)[0][0]
+        pos = ((image.shape[1] - text_width) // 2, image.shape[0] - 100)
+        cv2.rectangle(image, pos, (pos[0] + text_width, pos[1] - 100), (0, 0, 0), -1)
         cv2.putText(
             img=image,
-            text=transcription,
-            org=(textX, img.shape[0] - 100),
+            text=output,
+            org=pos,
             fontFace=cv2.FONT_HERSHEY_PLAIN,
             fontScale=5,
             color=(0, 0, 255),
