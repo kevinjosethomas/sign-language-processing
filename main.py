@@ -1,6 +1,8 @@
 import os
 import cv2
 import time
+import threading
+from langchain_community.llms import Ollama
 
 from asl.landmarker import Landmarker
 from asl.classifier import Classifier
@@ -8,12 +10,28 @@ from asl.classifier import Classifier
 landmarker = Landmarker()
 classifier = Classifier()
 
-if __name__ == "__main__":
-    camera = cv2.VideoCapture(1)
+llm = Ollama(model="llama3")
+transcription = ""
+
+
+def fix_transcription():
+    global transcription
+
+    previous = transcription
+    response = llm.invoke(
+        f"You are an LLM that corrects typos in words. I will keep sending you phrases, return the corrected sentence or word. Make sure your output is the corrected phrase WITH NO OTHER CONTENT. It should be exactly like the input but corrected. Do not precede or end it with any additional text. Here is the phrase: '{transcription}'"
+    )
+    print(response.strip())
+    transcription = response.strip().upper() + " "
+
+
+def main():
+    global transcription
+    camera = cv2.VideoCapture(0)
 
     start = time.time()
-    os.system("clear")
-    transcription = ""
+    # os.system("clear")
+
     transcription_log = []
 
     while camera.isOpened():
@@ -43,8 +61,7 @@ if __name__ == "__main__":
                         transcription += letter
                         transcribed = True
 
-                os.system("clear")
-                print(transcription)
+                # os.system("clear")
 
                 height, width, _ = image.shape
                 text_x = int(first_landmark[0] * width) - 100
@@ -63,7 +80,27 @@ if __name__ == "__main__":
             if transcription and transcription[-1] != " ":
                 transcription += " "
 
+                new_thread = threading.Thread(target=fix_transcription)
+                new_thread.start()
+
+        size = cv2.getTextSize(transcription, cv2.FONT_HERSHEY_PLAIN, 1, 2)[0]
+        textX = int((img.shape[1] - size[0]) / 2)
+        cv2.putText(
+            img=image,
+            text=transcription,
+            org=(textX, img.shape[0] - 100),
+            fontFace=cv2.FONT_HERSHEY_PLAIN,
+            fontScale=5,
+            color=(0, 0, 255),
+            thickness=8,
+            lineType=cv2.LINE_4,
+        )
+
         cv2.imshow("Sign Language Recognition", image)
 
         if cv2.waitKey(5) & 0xFF == 27:
             break
+
+
+if __name__ == "__main__":
+    main()
