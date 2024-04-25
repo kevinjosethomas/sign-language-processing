@@ -121,3 +121,19 @@
 <img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/0a9be99e-5ac1-4b2f-9baa-06284e755d5e">
 
 
+## Wednesday, April 24th
+- I continued to dedicate some time to get the transcription part working, now that the recognition part was decent enough
+- I developed a transcription procedure that inserted spaces when no hand was detected and didn't allow more than two consecutive repetitions of the same letter
+- I ended up with a decent procedure that effectively placed spaces and got relatiely correct letter placements
+- I attemped to fix any remaining inaccuracies and typoes by using llama2 to fix any errors in the transcription
+- Llama2 did not live up to the expectations so I tried Llama3 7B, but still failed to receive the results I wanted
+- I recorded an update video to demonstrate the current progress of the project as of right now (without AI translation)
+- Finally, I downloaded Llama3 70B... only to realize by M2 Air cannot handle it 💀
+- I decided to move to use OpenAIs APIs... and I settled with a decent prompt using GPT-4-Turbo
+- The code stores a raw transcription and an AI transcription. It only feeds OpenAI with the raw transcription and only shows the user the AI transcription
+- This allows GPT-4 to entirely change sentences as the raw input changes, as it can make better decisions with longer input
+- However, this also leads to the transcription changing entirely when the user uses it, but this is okay as it tends to become more correct over time
+- I spent 8 hours coding and atleast 2 more hours browsing and learning for this project today. I am now about 2 weeks behind for AP Physics prep, 1 week behind for AP Precalc prep, my AP Seminar Individual Media Presentation is in 2 days (I don't have a final script yet) and I haven't started preparing for AP Computer Science Principles yet. I think its time to focus on school....
+
+![image](https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/29508886-6f8c-4040-9fd5-22475e46816f)
+
