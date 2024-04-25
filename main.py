@@ -3,16 +3,18 @@ import cv2
 import threading
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
 
 from asl.landmarker import Landmarker
 from asl.classifier import Classifier
 
+load_dotenv()
 landmarker = Landmarker()
 classifier = Classifier()
-
 llm = ChatOpenAI(
-    model="gpt-4-turbo-preview",
-    openai_api_key=os.environ.get("OPENAI_API_KEY"),
+    # model="gpt-4-turbo-preview",
+    model="gpt-3.5-turbo-0125",
+    openai_api_key=os.getenv("OPENAI_API_KEY"),
 )
 
 # PROMPT = ChatPromptTemplate.from_messages(  # The alphabets that the software often gets confused between are: A, S, T, N and M; G and H; D and I; F and W; P and Q; R and U.
@@ -53,6 +55,8 @@ transcription_alphabet_log = []
 def fix_transcription():
     global transcription_words, transcription_current_word, transcription_alphabet_log, ai_transcription_words
 
+    ai_transcription_words.append(transcription_current_word)
+    transcription_current_word = ""
     transcription = " ".join(transcription_words)
     response = chain.invoke(
         {
@@ -119,7 +123,6 @@ def main():
         else:
             if transcription_current_word:
                 transcription_words.append(transcription_current_word)
-                transcription_current_word = ""
 
                 new_thread = threading.Thread(target=fix_transcription)
                 new_thread.start()
@@ -131,17 +134,23 @@ def main():
             ).strip()
             + " "
         )
-        text_width = cv2.getTextSize(output, cv2.FONT_HERSHEY_PLAIN, 5, 8)[0][0]
-        pos = ((image.shape[1] - text_width) // 2, image.shape[0] - 100)
-        cv2.rectangle(image, pos, (pos[0] + text_width, pos[1] - 100), (0, 0, 0), -1)
+        text_width = cv2.getTextSize(output, cv2.FONT_HERSHEY_DUPLEX, 2, 5)[0][0]
+        pos = ((image.shape[1] - text_width) // 2, image.shape[0] - 30)
+        cv2.rectangle(
+            image,
+            (0, image.shape[0] - 100),
+            (image.shape[1], image.shape[0]),
+            (255, 255, 255),
+            -1,
+        )
         cv2.putText(
             img=image,
             text=output,
             org=pos,
-            fontFace=cv2.FONT_HERSHEY_PLAIN,
-            fontScale=5,
-            color=(0, 0, 255),
-            thickness=8,
+            fontFace=cv2.FONT_HERSHEY_DUPLEX,
+            fontScale=2,
+            color=(0, 0, 0),
+            thickness=5,
             lineType=cv2.LINE_4,
         )
 

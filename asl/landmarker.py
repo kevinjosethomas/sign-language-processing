@@ -13,8 +13,8 @@ class Landmarker:
     def __init__(
         self,
         model_complexity: int = 0,
-        min_detection_confidence: float = 0.6,
-        min_tracking_confidence: float = 0.6,
+        min_detection_confidence: float = 0.75,
+        min_tracking_confidence: float = 0.75,
         max_num_hands: int = 1,
     ):
         self.model = mp.solutions.hands.Hands(
