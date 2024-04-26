@@ -1,6 +1,7 @@
 ## Thursday, April 25th
-- Cleaned up the visualization of live transcription
+- Cleaned up the visualization of live transcription (now shows up on the bottom of the screen)
 - Fixed the bug where text was deleted when sent to OpenAI for correction
+- Created a [demo video](https://www.youtube.com/watch?v=MAavd4ZODxU) to demonstrate all the progress so far
 
 
 ## Wednesday, April 24th
@@ -9,7 +10,7 @@
 - I ended up with a decent procedure that effectively placed spaces and got relatiely correct letter placements
 - I attemped to fix any remaining inaccuracies and typoes by using llama2 to fix any errors in the transcription
 - Llama2 did not live up to the expectations so I tried Llama3 7B, but still failed to receive the results I wanted
-- I recorded an update video to demonstrate the current progress of the project as of right now (without AI translation)
+- I recorded an [update video](https://www.youtube.com/watch?v=SQE21gRKCHs) to demonstrate the current progress of the project as of right now (without AI translation)
 - Finally, I downloaded Llama3 70B... only to realize by M2 Air cannot handle it 💀
 - I decided to move to use OpenAIs APIs... and I settled with a decent prompt using GPT-4-Turbo
 - The code stores a raw transcription and an AI transcription. It only feeds OpenAI with the raw transcription and only shows the user the AI transcription
