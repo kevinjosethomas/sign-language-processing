@@ -1,6 +1,5 @@
-![DEMO](https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/7fd84d83-e3ef-4713-92b2-20a73856b910)
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/8d3778e4-661b-45a5-a3f0-06d28fdde9b4
 # ✌️ ASL Fingerspell Recognition with MediaPipe, Keras and Pointnet
-
 
 ## Table of Contents
 
