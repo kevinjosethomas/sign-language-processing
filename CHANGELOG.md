@@ -1,3 +1,8 @@
+# Changelog
+This document is a log of my daily progress in this project. I log my work on a "best-effort" basis, and this document still lacks some of my attempts and discoveries. Regardless, it will still serve as a good starting point for anyone interested in understanding the process of this project's development. Feel free to contact me if you have any questions!
+
+# Log
+
 ## Thursday, April 25th
 - Cleaned up the visualization of live transcription (now shows up on the bottom of the screen)
 - Fixed the bug where text was deleted when sent to OpenAI for correction
@@ -127,7 +132,90 @@
 ## Saturday, April 13th
 
 - Once again, I looked through existing notebooks and developed a better understanding of how image classification and convolutional neural networks worked
-- After hours of training, the first model was complete, and I tested it once again. However, the model was still pretty inaccurate
+- After hours of training, the first model was complete
+  - Optimizer: Adam
+  - Loss: Sparse Categorical Crossentropy
+  - Parameters: 23,830,555
+- Here are the results after 20 epochs:
+![Accuracy and Loss - Training and Validation](https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/336d72e3-4c48-4b5f-955c-d162c58865aa)
+```
+              precision    recall  f1-score   support
+
+           A       0.94      0.93      0.93       100
+           B       0.90      0.93      0.92       100
+       Blank       0.99      0.98      0.98       100
+           C       0.96      0.95      0.95       100
+           D       0.89      0.89      0.89       100
+           E       0.86      0.81      0.84       100
+           F       0.95      0.88      0.91       100
+           G       0.92      0.93      0.93       100
+           H       0.97      0.95      0.96       100
+           I       0.89      0.87      0.88       100
+           J       0.86      0.96      0.91       100
+           K       0.80      0.93      0.86       100
+           L       0.95      0.94      0.94       100
+           M       0.71      0.77      0.74       100
+           N       0.75      0.79      0.77       100
+           O       0.89      0.93      0.91       100
+           P       0.95      0.98      0.97       100
+           Q       0.99      0.85      0.91       100
+           R       0.85      0.93      0.89       100
+           S       0.87      0.86      0.86       100
+           T       0.99      0.89      0.94       100
+           U       0.89      0.90      0.90       100
+           V       0.75      0.78      0.76       100
+           W       0.91      0.75      0.82       100
+           X       0.90      0.92      0.91       100
+           Y       0.98      0.95      0.96       100
+           Z       0.93      0.90      0.91       100
+
+    accuracy                           0.89      2700
+   macro avg       0.90      0.89      0.89      2700
+weighted avg       0.90      0.89      0.89      2700
+```
+- Here are the results after 30 epochs:
+
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/a75a5c66-5cc6-47d5-a5c2-6ab1094c5248">
+<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/acf76f32-429b-43e1-9e6c-b724e07ab4d4">
+
+```
+
+              precision    recall  f1-score   support
+
+           A       0.93      0.95      0.94       100
+           B       1.00      0.90      0.95       100
+       Blank       0.99      0.99      0.99       100
+           C       0.95      0.96      0.96       100
+           D       0.90      0.89      0.89       100
+           E       0.88      0.91      0.89       100
+           F       0.96      0.92      0.94       100
+           G       0.93      0.94      0.94       100
+           H       0.97      0.96      0.96       100
+           I       0.89      0.89      0.89       100
+           J       0.88      0.98      0.93       100
+           K       0.85      0.92      0.88       100
+           L       0.97      0.96      0.96       100
+           M       0.82      0.78      0.80       100
+           N       0.79      0.84      0.81       100
+           O       0.93      0.92      0.92       100
+           P       0.99      0.99      0.99       100
+           Q       0.99      0.90      0.94       100
+           R       0.90      0.91      0.91       100
+           S       0.87      0.87      0.87       100
+           T       0.98      0.92      0.95       100
+           U       0.82      0.94      0.88       100
+           V       0.78      0.83      0.81       100
+           W       0.89      0.80      0.84       100
+           X       0.90      0.92      0.91       100
+           Y       0.99      0.96      0.97       100
+           Z       0.95      0.89      0.92       100
+
+    accuracy                           0.91      2700
+   macro avg       0.91      0.91      0.91      2700
+weighted avg       0.91      0.91      0.91      2700
+```
+
+- I tested the model in real-life circumstances once again, however, the model was still pretty inaccurate
 
 
 ## Sunday, April 7th
