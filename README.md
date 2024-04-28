@@ -14,5 +14,4 @@ Initially, back in Grade 9, I was introduced to the basics of ASL, learning the 
 
 ## Functionality
 
-<img width="1986" alt="ASL Recognition UML" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/784042ef-af71-450a-aba6-f0cddd2b0d60">
-
+<img width="1986" alt="ASL Recognition UML" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/31d4c344-7a7d-40e8-879c-d5ceef7f442c">
