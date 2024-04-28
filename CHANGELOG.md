@@ -7,6 +7,7 @@ This document is a log of my daily progress in this project. I log my work on a 
 - I trained the model for 100 epochs with a Learning Rate of 0.0005. Here are the results:
 
 <img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c29a7ac8-56b2-4a54-82a4-b24db7a7acda">
+<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/bbc2d932-f3ae-4872-b784-1dda5f4b8550">
 
 - I believe it is noticeably more accurate, at least when I test out all alphabets
 - However, there is still a random spike in the validation loss and a sudden drop in validation accuracy. I'm not sure if I made a mistake in my dataset. The loss is still always about 135 which is an issue as well.
@@ -146,7 +147,9 @@ This document is a log of my daily progress in this project. I log my work on a 
   - Loss: Sparse Categorical Crossentropy
   - Parameters: 23,830,555
 - Here are the results after 20 epochs:
+
 <img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/336d72e3-4c48-4b5f-955c-d162c58865aa">
+
 ```
               precision    recall  f1-score   support
 
@@ -182,6 +185,7 @@ This document is a log of my daily progress in this project. I log my work on a 
    macro avg       0.90      0.89      0.89      2700
 weighted avg       0.90      0.89      0.89      2700
 ```
+
 - Here are the results after 30 epochs:
 
 <img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/a75a5c66-5cc6-47d5-a5c2-6ab1094c5248">
