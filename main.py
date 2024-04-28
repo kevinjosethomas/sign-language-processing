@@ -70,7 +70,7 @@ def fix_transcription():
 
 def main():
     global transcription_words, transcription_current_word, transcription_alphabet_log, ai_transcription_words
-    camera = cv2.VideoCapture(1)
+    camera = cv2.VideoCapture(2)
 
     while camera.isOpened():
 
