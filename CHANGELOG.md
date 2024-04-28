@@ -6,11 +6,30 @@ This document is a log of my daily progress in this project. I log my work on a 
 ## Sunday, April 28th
 - I trained the model for 100 epochs with a Learning Rate of 0.0005. Here are the results:
 
-<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c29a7ac8-56b2-4a54-82a4-b24db7a7acda">
-<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/bbc2d932-f3ae-4872-b784-1dda5f4b8550">
+<img height="287" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c29a7ac8-56b2-4a54-82a4-b24db7a7acda">
+<img height="287" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/bbc2d932-f3ae-4872-b784-1dda5f4b8550">
 
 - I believe it is noticeably more accurate, at least when I test out all alphabets
-- However, there is still a random spike in the validation loss and a sudden drop in validation accuracy. I'm not sure if I made a mistake in my dataset. The loss is still always about 135 which is an issue as well.
+- However, there is still a random spike in the validation loss and a sudden drop in validation accuracy. I'm not sure if I made a mistake in my dataset. The loss is still always about 135 which is an issue as well
+- Create more diagrams that explain the processes involved in ASL Translation
+  1. Describes normal 4-step communication process
+  2. Describes 4-step communication process with an interpreter/translator
+  3. Describes ASL communication process with a translation tool
+  4. Describes the benefit of my current ASL translation tool 
+
+<img height="226.4" alt="Communication Diagram" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/dad4548b-4d09-4092-9169-a0ec14807ced">
+<img height="226.4" alt="Communication with Interpreter" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/e1412e67-f601-4708-83f6-e9601f68d559">
+<img width="2460" alt="ASL Communication with Translation Tool" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1e5edcf1-4b6c-462b-87a0-fa177378d299">
+<img width="2460" alt="My Current Solution" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/de5166ff-567f-41fc-9cfb-fcffe2aaed87">
+
+
+## Saturday, April 29th
+- Created two UML diagrams
+  - One that represents the Training process of the PointNet model
+  - One that represents the Inference and Transcription process of the entire program
+
+<img width="1620" alt="Training" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c2b1dbd6-7a46-4d8e-9ed3-151fbb73facf">
+<img width="1986" alt="ASL Recognition UML" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/2a2d4998-4f64-4053-a4c9-1645fa2287db">
 
 
 ## Thursday, April 25th
@@ -47,12 +66,12 @@ This document is a log of my daily progress in this project. I log my work on a 
 - With the new 150,000 point dataset, I trained the PointNet model. However, I was getting absurd validation loss, beyond the billions.
 - I tried again with a batch size of 128 instead of 256, and the validation loss was significantly better, albeit still a little too high
 
-<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1dcf5a4c-1e40-4672-b320-c80795344180">
+<img width="1651" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1dcf5a4c-1e40-4672-b320-c80795344180">
 
 - I tried again with a batch size of 64, and the validation loss was even better, although still a little too high
 - This 20 Epoch, 64 Batch Size, 0.001 LR model is the most accurate model I have trained so far
 
-<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/0a9be99e-5ac1-4b2f-9baa-06284e755d5e">
+<img width="1651" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/0a9be99e-5ac1-4b2f-9baa-06284e755d5e">
 
 
 ## Monday, April 22nd
@@ -67,8 +86,8 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 - Then, I trained two separate models for the left and right hand respectively. I trained them both over 20 epochs with a learning rate of 0.001. For some reason, there seems to be an issue with the validation accuracy. Maybe there was too less test data considering I put all the new datasets into training data. Also, for some reason there were only around 20,000 files in my final dataset although it should be over 200,000 files. The new models are pretty inaccurate as well. Unsure what went wrong!
 
-<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3293ec61-eb12-44bf-8064-f3bde286cd72">
-<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/d642424b-72e9-41fa-af36-55031e4ed7ce">
+<img width="503" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3293ec61-eb12-44bf-8064-f3bde286cd72">
+<img width="503" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/d642424b-72e9-41fa-af36-55031e4ed7ce">
 
 
 ## Friday, April 19th
@@ -148,7 +167,7 @@ This document is a log of my daily progress in this project. I log my work on a 
   - Parameters: 23,830,555
 - Here are the results after 20 epochs:
 
-<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/336d72e3-4c48-4b5f-955c-d162c58865aa">
+<img width="1651" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/336d72e3-4c48-4b5f-955c-d162c58865aa">
 
 ```
               precision    recall  f1-score   support
@@ -188,8 +207,8 @@ weighted avg       0.90      0.89      0.89      2700
 
 - Here are the results after 30 epochs:
 
-<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/a75a5c66-5cc6-47d5-a5c2-6ab1094c5248">
-<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/acf76f32-429b-43e1-9e6c-b724e07ab4d4">
+<img width="503" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/a75a5c66-5cc6-47d5-a5c2-6ab1094c5248">
+<img width="503" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/acf76f32-429b-43e1-9e6c-b724e07ab4d4">
 
 ```
 
