@@ -3,6 +3,15 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Sunday, April 28th
+- I trained the model for 100 epochs with a Learning Rate of 0.0005. Here are the results:
+
+<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/c29a7ac8-56b2-4a54-82a4-b24db7a7acda">
+
+- I believe it is noticeably more accurate, at least when I test out all alphabets
+- However, there is still a random spike in the validation loss and a sudden drop in validation accuracy. I'm not sure if I made a mistake in my dataset. The loss is still always about 135 which is an issue as well.
+
+
 ## Thursday, April 25th
 - Cleaned up the visualization of live transcription (now shows up on the bottom of the screen)
 - Fixed the bug where text was deleted when sent to OpenAI for correction
@@ -37,12 +46,12 @@ This document is a log of my daily progress in this project. I log my work on a 
 - With the new 150,000 point dataset, I trained the PointNet model. However, I was getting absurd validation loss, beyond the billions.
 - I tried again with a batch size of 128 instead of 256, and the validation loss was significantly better, albeit still a little too high
 
-<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1dcf5a4c-1e40-4672-b320-c80795344180">
+<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1dcf5a4c-1e40-4672-b320-c80795344180">
 
 - I tried again with a batch size of 64, and the validation loss was even better, although still a little too high
 - This 20 Epoch, 64 Batch Size, 0.001 LR model is the most accurate model I have trained so far
 
-<img width="400" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/0a9be99e-5ac1-4b2f-9baa-06284e755d5e">
+<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/0a9be99e-5ac1-4b2f-9baa-06284e755d5e">
 
 
 ## Monday, April 22nd
@@ -137,7 +146,7 @@ This document is a log of my daily progress in this project. I log my work on a 
   - Loss: Sparse Categorical Crossentropy
   - Parameters: 23,830,555
 - Here are the results after 20 epochs:
-![Accuracy and Loss - Training and Validation](https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/336d72e3-4c48-4b5f-955c-d162c58865aa)
+<img width="800" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/336d72e3-4c48-4b5f-955c-d162c58865aa">
 ```
               precision    recall  f1-score   support
 
