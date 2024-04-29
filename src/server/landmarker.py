@@ -24,7 +24,7 @@ class Landmarker:
             max_num_hands=max_num_hands,
         )
 
-    def process(self, image: MatLike):
+    def draw_landmarks(self, image: MatLike):
         image.flags.writeable = False
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
