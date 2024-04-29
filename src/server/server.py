@@ -25,6 +25,7 @@ from aiortc import (
     RTCPeerConnection,
     RTCSessionDescription,
     RTCConfiguration,
+    RTCIceServer,
 )
 from aiortc.contrib.media import MediaBlackhole, MediaPlayer, MediaRecorder, MediaRelay
 
@@ -62,7 +63,11 @@ class VideoTransformTrack(MediaStreamTrack):
 @sio.event
 async def offer(sid, data):
     offer = RTCSessionDescription(sdp=data["sdp"], type=data["type"])
-    peer = RTCPeerConnection(configuration=RTCConfiguration(iceServers=[]))
+    peer = RTCPeerConnection(
+        configuration=RTCConfiguration(
+            iceServers=[RTCIceServer(urls="stun:localhost:19302")]
+        )
+    )
     peer_connections[sid] = peer
 
     print("Created Peer Connection")

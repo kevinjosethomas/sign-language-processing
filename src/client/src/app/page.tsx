@@ -53,13 +53,22 @@ const VideoComponent = () => {
   return (
     <div>
       <div className="w-screen">
-        <video ref={localRef} className=" z-10 w-full" autoPlay muted></video>
+        <video
+          ref={localRef}
+          className="z-10 w-full hidden"
+          autoPlay
+          muted
+        ></video>
         <video
           ref={remoteRef}
-          className=" z-20 w-full"
+          className="z-20 w-full"
           autoPlay
           playsInline
         ></video>
+        <iframe
+          src="http://localhost:5001/video"
+          className="w-screen h-screen"
+        />
       </div>
     </div>
   );
