@@ -22,6 +22,11 @@ This document is a log of my daily progress in this project. I log my work on a 
 <img width="2460" alt="ASL Communication with Translation Tool" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/1e5edcf1-4b6c-462b-87a0-fa177378d299">
 <img width="2460" alt="My Current Solution" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/de5166ff-567f-41fc-9cfb-fcffe2aaed87">
 
+- Spent 7 hours trying to get WebRTC working
+- Got WebRTC working
+- Realized WebRTC was kinda mid
+- Went back to using 5 lines of code to iframe a flask webpage that streamed the user's webcam
+
 
 ## Saturday, April 29th
 - Created two UML diagrams
