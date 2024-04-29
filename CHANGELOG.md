@@ -3,6 +3,13 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Monday, April 29th
+- Migrated from WebRTC architecture to flask + websockets
+- Cleaned up code and modularized structure further
+- Added new interface for ASL fingerspell recognition, as well as speech-to-text
+<img width="1822" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/8e9219a2-ab11-47a8-b074-4c1c5d680d5c">
+
+
 ## Sunday, April 28th
 - I trained the model for 100 epochs with a Learning Rate of 0.0005. Here are the results:
 
