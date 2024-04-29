@@ -4,8 +4,8 @@ from flask import Flask, Response
 from flask_socketio import SocketIO
 from flask_socketio import emit
 
-from store import Store
-from recognition import Recognition
+from utils.store import Store
+from utils.recognition import Recognition
 
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)

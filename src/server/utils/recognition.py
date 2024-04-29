@@ -2,10 +2,10 @@ import cv2
 import threading
 import numpy as np
 
-from llm import LLM
-from store import Store
-from landmarker import Landmarker
-from classifier import Classifier
+from utils.llm import LLM
+from utils.store import Store
+from utils.landmarker import Landmarker
+from utils.classifier import Classifier
 
 
 class Recognition:
