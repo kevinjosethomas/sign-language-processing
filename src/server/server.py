@@ -26,6 +26,8 @@ def recognize():
 
         image, updated = recognition.process(image)
 
+        image = cv2.resize(image, (image.shape[1] // 2, image.shape[0] // 2))
+
         _, buffer = cv2.imencode(".jpg", image)
         frame = buffer.tobytes()
 
@@ -43,6 +45,12 @@ def stream():
 @socketio.on("connect")
 def on_connect():
     print("Connected to client")
+
+
+@socketio.on("disconnect")
+def on_disconnect():
+    print("Disconnected from client")
+    Store.reset()
 
 
 if __name__ == "__main__":
