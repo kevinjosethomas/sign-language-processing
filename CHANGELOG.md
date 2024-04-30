@@ -3,6 +3,12 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Tuesday, April 30th
+- Added ThreeJS rendering of a 3D model (Teslabot!)
+- This will eventually adopt to sign actual ASL words
+<img width="1822" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/b806872c-8df9-4219-8d10-0fe72096301f">
+
+
 ## Monday, April 29th
 - Migrated from WebRTC architecture to flask + websockets
 - Cleaned up code and modularized structure further
