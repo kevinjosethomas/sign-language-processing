@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/fiber": "^8.16.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
@@ -16,6 +17,7 @@
     "regenerator-runtime": "^0.14.1",
     "simple-peer": "^9.11.1",
     "socket.io-client": "^4.7.5",
+    "three": "^0.164.1",
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "@types/react-dom": "^18",
     "@types/react-speech-recognition": "^3.9.5",
     "@types/simple-peer": "^9.11.8",
+    "@types/three": "^0.164.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",

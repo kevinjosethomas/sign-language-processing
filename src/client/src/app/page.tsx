@@ -10,6 +10,7 @@ import SpeechRecognition, {
 
 import Camera from "./components/Camera";
 import Transcription from "./components/Transcription";
+import Visualization from "./components/Visualization";
 
 const socket = io("http://localhost:1234");
 
@@ -42,7 +43,7 @@ export default function Home() {
           EnglishTranscription={transcript}
         />
       </div>
-      <div className="border rounded w-full p-4"></div>
+      <Visualization />
     </div>
   );
 }
