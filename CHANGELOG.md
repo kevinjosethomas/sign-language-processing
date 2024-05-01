@@ -13,7 +13,12 @@ This document is a log of my daily progress in this project. I log my work on a 
 - Migrated from WebRTC architecture to flask + websockets
 - Cleaned up code and modularized structure further
 - Added new interface for ASL fingerspell recognition, as well as speech-to-text
+
 <img width="1822" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/8e9219a2-ab11-47a8-b074-4c1c5d680d5c">
+
+- Imported rigged hand model and tried to manipulate it
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/e83b6ed9-f054-4f51-ae04-fd65ea7a8a96
+
 
 
 ## Sunday, April 28th
