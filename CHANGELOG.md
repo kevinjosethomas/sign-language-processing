@@ -3,6 +3,15 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Thursday, May 2nd
+- I'm failing AP Physics
+- Made some progress on the hand tracking...
+
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/9e85fe41-1ad5-44d2-9c97-f86f6de17193
+
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3be574b8-bf87-47d9-bdf3-40438c6f2f9f
+
+
 ## Tuesday, April 30th
 - Added ThreeJS rendering of a 3D model (Teslabot!)
 - This will eventually adopt to sign actual ASL words
