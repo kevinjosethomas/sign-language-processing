@@ -3,16 +3,30 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Thursday, May 2nd
+- I'm failing AP Physics
+- Made some progress on the hand tracking...
+
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/9e85fe41-1ad5-44d2-9c97-f86f6de17193
+
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3be574b8-bf87-47d9-bdf3-40438c6f2f9f
+
+
 ## Tuesday, April 30th
 - Added ThreeJS rendering of a 3D model (Teslabot!)
 - This will eventually adopt to sign actual ASL words
 <img width="1822" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/b806872c-8df9-4219-8d10-0fe72096301f">
+
+- Imported rigged hand model and tried to manipulate it based on my hand movements
+ 
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/e234d476-f4fc-454b-a820-906f0c60cd19
 
 
 ## Monday, April 29th
 - Migrated from WebRTC architecture to flask + websockets
 - Cleaned up code and modularized structure further
 - Added new interface for ASL fingerspell recognition, as well as speech-to-text
+
 <img width="1822" alt="image" src="https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/8e9219a2-ab11-47a8-b074-4c1c5d680d5c">
 
 
