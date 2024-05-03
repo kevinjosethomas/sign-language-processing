@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader, Canvas, useThree } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const PARENT_POINTS = [
   -1, // Palm (Root)
@@ -27,7 +27,7 @@ const PARENT_POINTS = [
   19, // Pinky 4
 ];
 
-const BONE_TO_POINT = [
+const BONE_TO_STARTING_POINT = [
   0, // Palm -> Thumb
   1, // Thumb 1 -> Thumb 2
   2, // Thumb 2 -> Thumb 3
@@ -50,8 +50,6 @@ const BONE_TO_POINT = [
   19, // Pinky 3 -> Pinky 4
 ];
 
-const BONE_SIZES = [];
-
 export default function Visualization({ points }: { points: number[][] }) {
   return (
     <div
@@ -67,7 +65,7 @@ export default function Visualization({ points }: { points: number[][] }) {
 }
 
 function Model({ points }: { points: number[][] }) {
-  const gltf = useLoader(GLTFLoader, "/untitled.glb");
+  const gltf = useLoader(GLTFLoader, "/2.glb");
   const { scene } = useThree();
   const skeleton = useRef();
 
@@ -77,82 +75,47 @@ function Model({ points }: { points: number[][] }) {
     skeleton.current = new THREE.SkeletonHelper(gltf.scene);
     skeleton.current.visible = true;
 
-    console.log(skeleton.current.bones);
-    for (let i = 0; i < skeleton.current.bones.length; i++) {
-      let bone = skeleton.current.bones[i];
-      let child = bone.children[0];
-
-      if (!child) {
-        BONE_SIZES.push(1);
-      } else {
-        BONE_SIZES.push(bone.position.distanceTo(child.position));
-      }
-    }
-
     return () => {
       scene.remove(gltf.scene);
       scene.remove(skeleton.current);
     };
   }, [gltf, scene]);
 
-  // function createMatrixFromLandmark(landmark: number[]) {
-  //   const matrices = [];
-  //   for (const point of points) {
-  //     let matrix = new THREE.Matrix4();
-  //     matrix.setPosition(new THREE.Vector3(point[0], point[1], point[2]));
-  //     matrices.push(matrix);
-  //   }
-  // }
-
   useEffect(() => {
-    // skeleton.current.bones[1].position.set(0, 0, 0);
-
     if (!points.length) {
       return;
     }
 
-    const relativePoints = [];
+    const rotation = [null];
 
-    for (let i = 0; i < points.length; i++) {
-      let point = points[i];
-      let parent_index = PARENT_POINTS[i];
+    for (let i = 1; i < points.length; i++) {
+      let point = new THREE.Vector3(...points[i]);
+      let parent = new THREE.Vector3(...points[PARENT_POINTS[i]]);
+      let direction = new THREE.Vector3().subVectors(parent, point).normalize();
 
-      if (parent_index == -1) {
-        relativePoints.push(point);
-        continue;
+      const parentDirection = new THREE.Vector3(0, 1, 0); // Assuming the default bone direction is up the y-axis
+      let quaternion = new THREE.Quaternion();
+      quaternion.setFromUnitVectors(parentDirection, direction);
+
+      if ([2, 3, 6, 7, 10, 11, 14, 15, 18, 19].includes(i)) {
+        let euler = new THREE.Euler().setFromQuaternion(quaternion, "XYZ");
+
+        euler.y = 0;
+        euler.z = 0;
+        euler.x = -1 * Math.abs(euler.x);
+
+        quaternion.setFromEuler(euler);
       }
 
-      let parent = points[parent_index];
-      let new_point = [
-        point[0] - parent[0],
-        point[1] - parent[1],
-        point[2] - parent[2],
-      ];
-
-      relativePoints.push(new_point);
+      rotation.push(quaternion);
     }
 
     for (let i = 1; i < skeleton.current.bones.length; i++) {
       let bone = skeleton.current.bones[i];
-      let point_index = BONE_TO_POINT[i];
-      let point = relativePoints[point_index];
+      let r = rotation[i + 1];
 
-      bone.position.set(point[1] * 10, -1 * point[1] * 50, point[2] * 50);
+      bone.rotation.setFromQuaternion(r);
     }
-
-    //
-    // console.log(points);
-    // console.log(skeleton.current.bones);
-    // if (!skeleton.current || !points.length) {
-    //   return;
-    // }
-    // for (let i = 0; i < 20; i++) {
-    //   skeleton.current.bones[i].position.set(
-    //     points[i][0],
-    //     points[i][1],
-    //     points[i][2]
-    //   );
-    // }
   }, [points]);
 
   return (
