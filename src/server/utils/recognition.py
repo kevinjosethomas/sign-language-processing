@@ -17,10 +17,13 @@ class Recognition:
 
     def process(self, image: np.ndarray):
 
-        success, image, points, first_landmark = self.landmarker.draw_landmarks(image)
+        success, image, points, world_points, first_landmark = (
+            self.landmarker.draw_landmarks(image)
+        )
 
         # If a hand is detected in the frame
         if success:
+
             added_letter = False
             letter, probability = self.classifier.classify(points)
             Store.raw_letters.append(letter)
@@ -70,4 +73,4 @@ class Recognition:
         if different:
             Store.parse(output)
 
-        return (image, different)
+        return (image, different, world_points if success else None)

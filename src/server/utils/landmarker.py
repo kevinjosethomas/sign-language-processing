@@ -34,7 +34,7 @@ class Landmarker:
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         if not results.multi_hand_landmarks:
-            return False, image, None, None
+            return False, image, None, None, None
 
         for landmarks in results.multi_hand_landmarks:
             drawing_utils.draw_landmarks(
@@ -50,12 +50,22 @@ class Landmarker:
             )
 
         hand = results.multi_hand_landmarks[0]
-        points = np.array(
-            [(landmark.x, landmark.y, landmark.z) for landmark in hand.landmark]
+        points = self.normalize_points(
+            np.array(
+                [(landmark.x, landmark.y, landmark.z) for landmark in hand.landmark]
+            )
         )
-        points = self.normalize_points(points)
-
-        return True, image, points, (hand.landmark[0].x, hand.landmark[0].y)
+        world_points = [
+            (landmark.x, landmark.y, landmark.z)
+            for landmark in results.multi_hand_world_landmarks[0].landmark
+        ]
+        return (
+            True,
+            image,
+            points,
+            world_points,
+            (hand.landmark[0].x, hand.landmark[0].y),
+        )
 
     def normalize_points(self, points):
         min_x = np.min(points[:, 0])

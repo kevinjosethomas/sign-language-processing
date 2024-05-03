@@ -24,7 +24,8 @@ def recognize():
         if not success:
             continue
 
-        image, updated = recognition.process(image)
+        # image = cv2.flip(image, 1)
+        image, updated, points = recognition.process(image)
 
         image = cv2.resize(image, (image.shape[1] // 2, image.shape[0] // 2))
 
@@ -33,6 +34,9 @@ def recognize():
 
         if updated:
             socketio.emit("transcription", Store.parsed)
+
+        if points:
+            socketio.emit("points", points)
 
         yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 

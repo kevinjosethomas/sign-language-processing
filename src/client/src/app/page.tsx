@@ -18,6 +18,7 @@ export default function Home() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [ASLTranscription, setASLTranscription] = useState("");
   const [EnglishTranscription, setEnglishTranscription] = useState("");
+  const [points, setPoints] = useState([]);
 
   useEffect(() => {
     SpeechRecognition.startListening({ continuous: true });
@@ -27,6 +28,10 @@ export default function Home() {
 
     socket.on("transcription", (data) => {
       setASLTranscription(data);
+    });
+
+    socket.on("points", (data) => {
+      setPoints(data);
     });
   }, []);
 
@@ -43,7 +48,7 @@ export default function Home() {
           EnglishTranscription={transcript}
         />
       </div>
-      <Visualization />
+      <Visualization points={points} />
     </div>
   );
 }
