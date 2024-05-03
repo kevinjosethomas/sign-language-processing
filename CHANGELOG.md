@@ -11,6 +11,9 @@ https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/9e8
 
 https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/3be574b8-bf87-47d9-bdf3-40438c6f2f9f
 
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/44b0694e-0ef5-42c4-a5da-32795fd8b8ac
+
+
 
 ## Tuesday, April 30th
 - Added ThreeJS rendering of a 3D model (Teslabot!)
