@@ -3,6 +3,16 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Friday, May 4th
+- Made a script that converts videos in a directory into a JSON file of the pose and hand landmarks
+ - I will use this to parse hundreds/thousands of ASL signs into points that I can play via ThreeJS
+- Next few obstacles:
+ - Getting videos of so many words (scraping?)
+ - Playing the animations of the points using ThreeJS
+ - Interpolating missing points in between frames and making the animation smooth
+ - Storing the points (its a lot of data!)
+- I might be better off to just store videos of each word??
+
 ## Thursday, May 2nd
 - I'm failing AP Physics
 - Made some progress on the hand tracking...
