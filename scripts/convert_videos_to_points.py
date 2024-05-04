@@ -25,6 +25,7 @@ for i, file in enumerate(videos):
         if not success:
             break
 
+        frame = cv2.resize(frame, (640, 480))
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         poses = pose_model.process(frame_rgb)
         hands = hand_model.process(frame_rgb)
