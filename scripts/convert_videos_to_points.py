@@ -1,8 +1,20 @@
 import os
 import cv2
 import json
+import dotenv
+import psycopg2
 from tqdm import tqdm
 import mediapipe as mp
+
+dotenv.load_dotenv()
+
+conn = psycopg2.connect(
+    database="signs",
+    host="localhost",
+    user="postgres",
+    password=os.getenv("POSTGRES_PASSWORD"),
+    port=5432,
+)
 
 mp_drawing = mp.solutions.drawing_utils
 pose_tools = mp.solutions.pose
@@ -10,10 +22,10 @@ pose_model = pose_tools.Pose()
 hand_tools = mp.solutions.hands
 hand_model = hand_tools.Hands()
 
+
 videos = os.listdir("../data/signs/videos/")
 
 
-words = {}
 bar = tqdm(total=len(videos))
 
 try:
@@ -69,13 +81,16 @@ try:
             data.append(point)
 
         capture.release()
-        words[word] = data
+
+        with conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO signs (word, points) VALUES (%s, %s)",
+                (word, json.dumps(data)),
+            )
+            conn.commit()
 except Exception as e:
     print(e)
 
-with open("../data/signs/points/raw_points.json", "w") as f:
-    json.dump(words, f)
-    f.close()
 
 # for word in words:
 #     frames = words[word]
