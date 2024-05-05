@@ -58,7 +58,7 @@ function connectPose(index: number, scene: THREE.Scene) {
         p2.x * SCALE,
         p2.y * SCALE,
         p2.z * SCALE,
-        0x494949,
+        0x5d5d5d,
         scene
       );
     }
