@@ -18,8 +18,9 @@ export default function Home() {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [ASLTranscription, setASLTranscription] = useState("");
   const [points, setPoints] = useState([]);
-  const wordsToPlay = useRef<string[]>([]);
-  const [currentWord, setCurrentWord] = useState<string>();
+  const currentWords = useRef<string[]>([]);
+  const [currentWord, setCurrentWord] = useState<string>("");
+  const wordAnimationsToPlay = useRef<any>([]);
 
   useEffect(() => {
     SpeechRecognition.startListening({ continuous: true });
@@ -34,15 +35,20 @@ export default function Home() {
     socket.on("points", (data) => {
       setPoints(data);
     });
+
+    socket.on("words", (animations) => {
+      wordAnimationsToPlay.current = [
+        ...wordAnimationsToPlay.current,
+        ...animations,
+      ];
+    });
   }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      wordsToPlay.current = [
-        ...wordsToPlay.current,
-        ...transcript.toLowerCase().split(" "),
-      ];
+      currentWords.current = [...transcript.toLowerCase().split(" ")];
       resetTranscript();
+      socket.emit("words", currentWords.current);
     }, 2000);
 
     return () => {
@@ -51,14 +57,14 @@ export default function Home() {
   }, [transcript]);
 
   function getNextWord(): string | null {
-    if (wordsToPlay.current.length === 0) {
+    if (!wordAnimationsToPlay.current.length) {
       return null;
     }
 
-    let word = wordsToPlay.current.shift() as string;
-    setCurrentWord(word);
+    let animation = wordAnimationsToPlay.current.shift();
+    setCurrentWord(animation[0]);
 
-    return word;
+    return animation[1];
   }
 
   return (

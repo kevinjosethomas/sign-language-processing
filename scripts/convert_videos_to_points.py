@@ -15,6 +15,7 @@ conn = psycopg2.connect(
     password=os.getenv("POSTGRES_PASSWORD"),
     port=5432,
 )
+cur = conn.cursor()
 
 mp_drawing = mp.solutions.drawing_utils
 pose_tools = mp.solutions.pose
@@ -23,7 +24,7 @@ hand_tools = mp.solutions.hands
 hand_model = hand_tools.Hands()
 
 
-videos = os.listdir("../data/signs/videos/")
+videos = os.listdir("../data/signs/videos/")[6960:]
 
 
 bar = tqdm(total=len(videos))
@@ -81,13 +82,16 @@ try:
             data.append(point)
 
         capture.release()
-
-        with conn.cursor() as cur:
+        try:
             cur.execute(
                 "INSERT INTO signs (word, points) VALUES (%s, %s)",
                 (word, json.dumps(data)),
             )
             conn.commit()
+        except Exception as e:
+            print(e)
+            conn.rollback()
+            continue
 except Exception as e:
     print(e)
 

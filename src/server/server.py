@@ -1,12 +1,15 @@
+import os
 import cv2
 import logging
+import psycopg2
+from dotenv import load_dotenv
 from flask import Flask, Response
-from flask_socketio import SocketIO
-from flask_socketio import emit
+from flask_socketio import SocketIO, emit
 
 from utils.store import Store
 from utils.recognition import Recognition
 
+load_dotenv()
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 
@@ -14,6 +17,14 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 camera = cv2.VideoCapture(2)
 recognition = Recognition()
+
+conn = psycopg2.connect(
+    database="signs",
+    host="localhost",
+    user="postgres",
+    password=os.getenv("POSTGRES_PASSWORD"),
+    port=5432,
+)
 
 
 def recognize():
@@ -55,6 +66,22 @@ def on_connect():
 def on_disconnect():
     print("Disconnected from client")
     Store.reset()
+
+
+@socketio.on("words")
+def on_word(words):
+
+    animations = []
+    cursor = conn.cursor()
+    for word in words:
+        cursor.execute("SELECT * FROM signs WHERE word LIKE %s", (word,))
+        result = cursor.fetchone()
+        if result:
+            animations.append((word, result[2]))
+
+    emit("words", animations)
+
+    cursor.close()
 
 
 if __name__ == "__main__":

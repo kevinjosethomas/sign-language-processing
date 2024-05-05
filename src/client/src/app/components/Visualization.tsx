@@ -43,7 +43,7 @@ function drawLine(
   scene.add(mesh);
 }
 
-function connectPose(index: number, word: string, scene: THREE.Scene) {
+function connectPose(index: number, animation: any, scene: THREE.Scene) {
   const edges = [
     [11, 12],
     [12, 14],
@@ -54,7 +54,7 @@ function connectPose(index: number, word: string, scene: THREE.Scene) {
     [12, 24],
   ];
 
-  const pose = points[word][index][1];
+  const pose = animation[index][1];
 
   edges.map((edge) => {
     const u = edge[0];
@@ -76,7 +76,7 @@ function connectPose(index: number, word: string, scene: THREE.Scene) {
   });
 }
 
-function connectHands(index: number, word: string, scene: THREE.Scene) {
+function connectHands(index: number, animation: any, scene: THREE.Scene) {
   const edges = [
     [0, 1],
     [1, 2],
@@ -101,8 +101,8 @@ function connectHands(index: number, word: string, scene: THREE.Scene) {
     [0, 17],
   ];
 
-  const left = points[word][index][2][0];
-  const right = points[word][index][2][1];
+  const left = animation[index][2][0];
+  const right = animation[index][2][1];
 
   edges.map((edge) => {
     const u = edge[0];
@@ -167,37 +167,32 @@ function Sign({ getNextWord }: { getNextWord: () => string | null }) {
   const { camera } = useThree();
   const previous_frame = useRef(0);
   const start_time = useRef(0);
-  const word = useRef<string | null>(null);
+  const word = useRef<any>(null);
 
   useFrame(({ clock, scene }) => {
     const elapsed = clock.getElapsedTime() - start_time.current;
-    const frame_index = Math.floor(elapsed * 30);
+    const frame_index = Math.floor(elapsed * 45);
 
     if (frame_index !== previous_frame.current) {
       previous_frame.current = frame_index;
 
-      if (word.current === null) {
+      if (!word.current) {
         word.current = getNextWord();
         start_time.current = clock.getElapsedTime();
         previous_frame.current = 0;
         return;
       }
 
-      if (!points[word.current]) {
-        word.current = getNextWord();
-        return;
-      }
-
-      if (frame_index >= points[word.current].length) {
+      if (frame_index >= word.current.length) {
         word.current = null;
         return;
       }
 
       scene.remove(...scene.children);
 
-      const left = points[word.current][0][2][0];
-      const right = points[word.current][0][2][1];
-      const pose = points[word.current][0][1];
+      const left = word.current[0][2][0];
+      const right = word.current[0][2][1];
+      const pose = word.current[0][1];
 
       pose.map((point) =>
         drawPoint(point[1] * SCALE, point[2] * SCALE, point[3] * SCALE)
