@@ -26,8 +26,7 @@ for url in xml.findall("doc:url", namespaces=nsmp):
 
 all_words = []
 bar = tqdm(total=len(urls))
-bar.update(291)
-for url in urls[291:]:
+for url in urls:
 
     try:
         bar.update(1)

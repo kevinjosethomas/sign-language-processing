@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { MeshLine, MeshLineMaterial, MeshLineRaycast } from "three.meshline";
 
 import points from "../../../public/raw_points.json";
 import { get } from "http";
@@ -21,16 +22,25 @@ function drawLine(
   x2: number,
   y2: number,
   z2: number,
-  color: number,
+  color: number[],
   scene: THREE.Scene
 ) {
   const p = [];
   p.push(new THREE.Vector3(x1, -y1, z1));
   p.push(new THREE.Vector3(x2, -y2, z2));
   const geometry = new THREE.BufferGeometry().setFromPoints(p);
-  const material = new THREE.LineBasicMaterial({ color: color });
-  const line = new THREE.Line(geometry, material);
-  scene.add(line);
+  const material = new MeshLineMaterial({
+    color: new THREE.Color(color[0]),
+    opacity: color[1],
+    lineWidth: 0.05,
+    transparent: true,
+    depthTest: false,
+  });
+  const line = new MeshLine();
+  line.setGeometry(geometry);
+
+  const mesh = new THREE.Mesh(line, material);
+  scene.add(mesh);
 }
 
 function connectPose(index: number, word: string, scene: THREE.Scene) {
@@ -59,7 +69,7 @@ function connectPose(index: number, word: string, scene: THREE.Scene) {
         p2[1] * SCALE,
         p2[2] * SCALE,
         p2[3] * SCALE,
-        0x5d5d5d,
+        [0xffffff, 0.2],
         scene
       );
     }
@@ -107,7 +117,7 @@ function connectHands(index: number, word: string, scene: THREE.Scene) {
         l2[1] * SCALE,
         l2[2] * SCALE,
         l2[3] * SCALE,
-        0x00ff00,
+        [0x00ff00, 1],
         scene
       );
     }
@@ -121,7 +131,7 @@ function connectHands(index: number, word: string, scene: THREE.Scene) {
         r2[1] * SCALE,
         r2[2] * SCALE,
         r2[3] * SCALE,
-        0x00ff00,
+        [0x00ff00, 1],
         scene
       );
     }
