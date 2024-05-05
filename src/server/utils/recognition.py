@@ -48,19 +48,19 @@ class Recognition:
                         Store.raw_word += letter
                         added_letter = True
 
-                # height, width, _ = image.shape
-                # text_x = int(first_landmark[0] * width) - 100
-                # text_y = int(first_landmark[1] * height) + 50
-                # cv2.putText(
-                #     img=image,
-                #     text=f"{letter} {round(probability * 100 * 100) / 100}%",
-                #     org=(text_x, text_y),
-                #     fontFace=cv2.FONT_HERSHEY_PLAIN,
-                #     fontScale=5,
-                #     color=(0, 0, 255) if added_letter else (0, 255, 0),
-                #     thickness=4,
-                #     lineType=cv2.LINE_4,
-                # )
+                height, width, _ = image.shape
+                text_x = int(first_landmark[0] * width) - 100
+                text_y = int(first_landmark[1] * height) + 50
+                cv2.putText(
+                    img=image,
+                    text=f"{letter} {round(probability * 100 * 100) / 100}%",
+                    org=(text_x, text_y),
+                    fontFace=cv2.FONT_HERSHEY_PLAIN,
+                    fontScale=5,
+                    color=(0, 0, 255) if added_letter else (0, 255, 0),
+                    thickness=4,
+                    lineType=cv2.LINE_4,
+                )
         else:  # If no hand is detected, add a space
             if Store.raw_word:
                 Store.raw_transcription.append(Store.raw_word)

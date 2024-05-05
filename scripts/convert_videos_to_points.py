@@ -35,7 +35,7 @@ for i, file in enumerate(videos):
         if poses.pose_landmarks:
             for landmarks in poses.pose_landmarks.landmark:
                 point["pose"].append(
-                    {"x": landmarks.x, "y": landmarks.y, "z": landmarks.z}
+                    {"x": landmarks.x * 640, "y": landmarks.y * 480, "z": landmarks.z}
                 )
 
         if hands.multi_hand_landmarks:
@@ -54,8 +54,8 @@ for i, file in enumerate(videos):
                     point["hand"][handedness].append(
                         {
                             "joint": joint,
-                            "x": landmark.x,
-                            "y": landmark.y,
+                            "x": landmark.x * 640,
+                            "y": landmark.y * 480,
                             "z": landmark.z,
                         }
                     )

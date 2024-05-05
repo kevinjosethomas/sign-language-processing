@@ -40,15 +40,15 @@ export default function Home() {
   }, [transcript]);
 
   return (
-    <div className="w-screen h-screen flex gap-4 p-4">
-      <div className="flex flex-col w-full h-full gap-4">
+    <div className="w-screen h-screen flex flex-row gap-4 p-4">
+      <div className="flex flex-col gap-4">
         <Camera />
-        <Transcription
-          ASLTranscription={ASLTranscription}
-          EnglishTranscription={transcript}
-        />
+        <Transcription content={ASLTranscription} />
       </div>
-      <Visualization points={points} />
+      <div className="flex flex-col gap-4 grow">
+        <Visualization points={points} />
+        <Transcription content={transcript} />
+      </div>
     </div>
   );
 }
