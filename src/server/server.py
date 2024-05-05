@@ -46,9 +46,6 @@ def recognize():
         if updated:
             socketio.emit("transcription", Store.parsed)
 
-        if points:
-            socketio.emit("points", points)
-
         yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 
 

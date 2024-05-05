@@ -15,25 +15,22 @@ import Visualization from "./components/Visualization";
 const socket = io("http://localhost:1234");
 
 export default function Home() {
-  const { transcript, resetTranscript } = useSpeechRecognition();
-  const [ASLTranscription, setASLTranscription] = useState("");
-  const [points, setPoints] = useState([]);
   const currentWords = useRef<string[]>([]);
-  const [currentWord, setCurrentWord] = useState<string>("");
   const wordAnimationsToPlay = useRef<any>([]);
+  const [currentWord, setCurrentWord] = useState<string>("");
+  const { transcript, resetTranscript } = useSpeechRecognition();
+
+  const [ASLTranscription, setASLTranscription] = useState("");
 
   useEffect(() => {
     SpeechRecognition.startListening({ continuous: true });
+
     socket.on("connect", () => {
       console.log("Connected to server");
     });
 
     socket.on("transcription", (data) => {
       setASLTranscription(data);
-    });
-
-    socket.on("points", (data) => {
-      setPoints(data);
     });
 
     socket.on("words", (animations) => {
@@ -49,7 +46,7 @@ export default function Home() {
       currentWords.current = [...transcript.toLowerCase().split(" ")];
       resetTranscript();
       socket.emit("words", currentWords.current);
-    }, 2000);
+    }, 1500);
 
     return () => {
       clearTimeout(timeout);
@@ -74,11 +71,7 @@ export default function Home() {
         <Transcription content={ASLTranscription} />
       </div>
       <div className="flex flex-col gap-4 grow">
-        <Visualization
-          points={points}
-          getNextWord={getNextWord}
-          currentWord={currentWord}
-        />
+        <Visualization getNextWord={getNextWord} currentWord={currentWord} />
         <Transcription content={transcript} />
       </div>
     </div>
