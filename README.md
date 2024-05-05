@@ -1,6 +1,6 @@
 https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/8d3778e4-661b-45a5-a3f0-06d28fdde9b4
 
-# ✌️ ASL Fingerspell Recognition with MediaPipe, PointNet and LLMs
+# ✌️ ASL ⭤ English Translation with MediaPipe, PointNet and LLMs
 
 ## Table of Contents
 
