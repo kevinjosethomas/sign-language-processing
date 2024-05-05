@@ -34,11 +34,11 @@ class LLM:
         Store.transcription.append(Store.raw_word)
         Store.raw_word = ""
 
-        raw_transcription = " ".join(Store.raw_transcription)
-        response = LLM.CHAIN.invoke(
-            {
-                "transcription": raw_transcription,
-            }
-        )
+        # raw_transcription = " ".join(Store.raw_transcription)
+        # response = LLM.CHAIN.invoke(
+        #     {
+        #         "transcription": raw_transcription,
+        #     }
+        # )
 
-        Store.transcription = response.content.strip().upper().split()
+        # Store.transcription = response.content.strip().upper().split()
