@@ -12,6 +12,10 @@ This document is a log of my daily progress in this project. I log my work on a 
  - Interpolating missing points in between frames and making the animation smooth
  - Storing the points (its a lot of data!)
 - I might be better off to just store videos of each word??
+- Finished first iteration of animation
+
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/e4d4dfb1-2538-456c-9f38-e7e10d687625
+
 
 ## Thursday, May 2nd
 - I'm failing AP Physics
