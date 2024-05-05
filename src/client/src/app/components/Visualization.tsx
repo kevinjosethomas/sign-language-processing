@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 
 import points from "../../../public/raw_points.json";
+import { get } from "http";
 
 const SCALE = 0.015;
 
@@ -32,7 +33,7 @@ function drawLine(
   scene.add(line);
 }
 
-function connectPose(index: number, scene: THREE.Scene) {
+function connectPose(index: number, word: string, scene: THREE.Scene) {
   const edges = [
     [11, 12],
     [12, 14],
@@ -43,7 +44,7 @@ function connectPose(index: number, scene: THREE.Scene) {
     [12, 24],
   ];
 
-  const pose = points.name[index].pose;
+  const pose = points[word][index][1];
 
   edges.map((edge) => {
     const u = edge[0];
@@ -52,12 +53,12 @@ function connectPose(index: number, scene: THREE.Scene) {
       const p1 = pose[u];
       const p2 = pose[v];
       drawLine(
-        p1.x * SCALE,
-        p1.y * SCALE,
-        p1.z * SCALE,
-        p2.x * SCALE,
-        p2.y * SCALE,
-        p2.z * SCALE,
+        p1[1] * SCALE,
+        p1[2] * SCALE,
+        p1[3] * SCALE,
+        p2[1] * SCALE,
+        p2[2] * SCALE,
+        p2[3] * SCALE,
         0x5d5d5d,
         scene
       );
@@ -65,7 +66,7 @@ function connectPose(index: number, scene: THREE.Scene) {
   });
 }
 
-function connectHands(index: number, scene: THREE.Scene) {
+function connectHands(index: number, word: string, scene: THREE.Scene) {
   const edges = [
     [0, 1],
     [1, 2],
@@ -90,8 +91,8 @@ function connectHands(index: number, scene: THREE.Scene) {
     [0, 17],
   ];
 
-  const left = points.name[index].hand.left;
-  const right = points.name[index].hand.right;
+  const left = points[word][index][2][0];
+  const right = points[word][index][2][1];
 
   edges.map((edge) => {
     const u = edge[0];
@@ -100,12 +101,12 @@ function connectHands(index: number, scene: THREE.Scene) {
       const l1 = left[u];
       const l2 = left[v];
       drawLine(
-        l1.x * SCALE,
-        l1.y * SCALE,
-        l1.z * SCALE,
-        l2.x * SCALE,
-        l2.y * SCALE,
-        l2.z * SCALE,
+        l1[1] * SCALE,
+        l1[2] * SCALE,
+        l1[3] * SCALE,
+        l2[1] * SCALE,
+        l2[2] * SCALE,
+        l2[3] * SCALE,
         0x00ff00,
         scene
       );
@@ -114,12 +115,12 @@ function connectHands(index: number, scene: THREE.Scene) {
       const r1 = right[u];
       const r2 = right[v];
       drawLine(
-        r1.x * SCALE,
-        r1.y * SCALE,
-        r1.z * SCALE,
-        r2.x * SCALE,
-        r2.y * SCALE,
-        r2.z * SCALE,
+        r1[1] * SCALE,
+        r1[2] * SCALE,
+        r1[3] * SCALE,
+        r2[1] * SCALE,
+        r2[2] * SCALE,
+        r2[3] * SCALE,
         0x00ff00,
         scene
       );
@@ -127,60 +128,86 @@ function connectHands(index: number, scene: THREE.Scene) {
   });
 }
 
-export default function Visualization({ points }: { points: number[][] }) {
+export default function Visualization({
+  points,
+  getNextWord,
+  currentWord,
+}: {
+  points: number[][];
+  getNextWord: () => string | null;
+  currentWord: string;
+}) {
   return (
     <div
       id="canvas-container"
-      className="border rounded overflow-hidden h-[540px] bg-gradient-to-br from-neutral-800 to-neutral-950"
+      className="relative border rounded overflow-hidden h-[540px] bg-gradient-to-br from-neutral-800 to-neutral-950"
     >
+      <p className="text-4xl upper text-white absolute z-10 bottom-10 justify-center flex w-full">
+        {currentWord}
+      </p>
       <Canvas>
-        <Sign />
+        <Sign getNextWord={getNextWord} />
         <ambientLight intensity={1} />
       </Canvas>
     </div>
   );
 }
 
-function Sign() {
-  const { scene, camera } = useThree();
+function Sign({ getNextWord }: { getNextWord: () => string | null }) {
+  const { camera } = useThree();
   const previous_frame = useRef(0);
+  const start_time = useRef(0);
+  const word = useRef<string | null>(null);
 
   useFrame(({ clock, scene }) => {
-    const elapsed = clock.getElapsedTime();
-    const frame_index = Math.floor(elapsed * 45);
+    const elapsed = clock.getElapsedTime() - start_time.current;
+    const frame_index = Math.floor(elapsed * 30);
 
     if (frame_index !== previous_frame.current) {
       previous_frame.current = frame_index;
 
-      if (frame_index >= points.name.length) {
+      if (word.current === null) {
+        word.current = getNextWord();
+        start_time.current = clock.getElapsedTime();
+        previous_frame.current = 0;
+        return;
+      }
+
+      if (!points[word.current]) {
+        word.current = getNextWord();
+        return;
+      }
+
+      if (frame_index >= points[word.current].length) {
+        word.current = null;
         return;
       }
 
       scene.remove(...scene.children);
 
-      const left = points.name[0].hand.left;
-      const right = points.name[0].hand.right;
-      const pose = points.name[0].pose;
+      const left = points[word.current][0][2][0];
+      const right = points[word.current][0][2][1];
+      const pose = points[word.current][0][1];
 
       pose.map((point) =>
-        drawPoint(point.x * SCALE, point.y * SCALE, point.z * SCALE)
+        drawPoint(point[1] * SCALE, point[2] * SCALE, point[3] * SCALE)
       );
 
       left.map((point) =>
-        drawPoint(point.x * SCALE, point.y * SCALE, point.z * SCALE)
+        drawPoint(point[1] * SCALE, point[2] * SCALE, point[3] * SCALE)
       );
 
       right.map((point) =>
-        drawPoint(point.x * SCALE, point.y * SCALE, point.z * SCALE)
+        drawPoint(point[1] * SCALE, point[2] * SCALE, point[3] * SCALE)
       );
 
-      connectHands(frame_index, scene);
-      connectPose(frame_index, scene);
+      connectHands(frame_index, word.current, scene);
+      connectPose(frame_index, word.current, scene);
     }
   });
 
   useEffect(() => {
-    camera.position.set(5, -5, 4);
+    camera.position.set(5, -5, 5);
     camera.rotation.set(0, 0, 0);
   }, [camera]);
 
