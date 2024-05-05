@@ -1,10 +1,7 @@
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
+import { MeshLine, MeshLineMaterial } from "three.meshline";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { MeshLine, MeshLineMaterial, MeshLineRaycast } from "three.meshline";
-
-import points from "../../../public/raw_points.json";
-import { get } from "http";
 
 const SCALE = 0.015;
 
