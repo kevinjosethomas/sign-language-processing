@@ -3,7 +3,17 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
-## Friday, May 4th
+## Sunday, May 5th
+- Downloaded over 10,000 videos of ASL words
+- Parsed all viable videos into points, and stored in a PostgreSQL database
+- Used websockets to send English transcription to the server, and receive points for the animation of the word
+- Cleaned up the avatar of the animation to look more friendly
+
+
+https://github.com/kevinjosethomas/sign-language-recognition/assets/46242684/f12ed65b-1e12-4d2c-ac6a-4d7a57150fde
+
+
+## Saturday, May 4th
 - Made a script that converts videos in a directory into a JSON file of the pose and hand landmarks
  - I will use this to parse hundreds/thousands of ASL signs into points that I can play via ThreeJS
 - Next few obstacles:
