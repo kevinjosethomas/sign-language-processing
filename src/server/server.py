@@ -5,6 +5,8 @@ import psycopg2
 from dotenv import load_dotenv
 from flask import Flask, Response
 from flask_socketio import SocketIO, emit
+from pgvector.psycopg2 import register_vector
+from sentence_transformers import SentenceTransformer
 
 from utils.store import Store
 from utils.recognition import Recognition
@@ -18,6 +20,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 camera = cv2.VideoCapture(2)
 recognition = Recognition()
 
+model = SentenceTransformer("all-MiniLM-L6-v2")
 conn = psycopg2.connect(
     database="signs",
     host="localhost",
@@ -25,6 +28,7 @@ conn = psycopg2.connect(
     password=os.getenv("POSTGRES_PASSWORD"),
     port=5432,
 )
+register_vector(conn)
 
 
 def recognize():
@@ -71,10 +75,19 @@ def on_word(words):
     animations = []
     cursor = conn.cursor()
     for word in words:
-        cursor.execute("SELECT * FROM signs WHERE word LIKE %s", (word,))
+
+        word = word.strip()
+        if not word:
+            continue
+
+        embedding = model.encode(word)
+        cursor.execute(
+            "SELECT word, points, (embedding <=> %s) AS cosine_similarity FROM signs ORDER BY cosine_similarity ASC LIMIT 1",
+            (embedding,),
+        )
         result = cursor.fetchone()
-        if result:
-            animations.append((word, result[2]))
+        if result and 1 - result[2] > 0.70:
+            animations.append((word, result[1]))
 
     emit("words", animations)
 
