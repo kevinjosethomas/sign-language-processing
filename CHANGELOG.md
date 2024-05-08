@@ -3,6 +3,16 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Wednesday, May 7th
+- I just realized I can probably use if statements to fix errors between commonly misrecognized letters like A-M-N-S-T by checking the location of important points like the thumb
+
+
+## Monday, May 6th
+- Generated and stored embeddings for all words in the database
+- Changed English -> ASL Sign transcription by converting input into embeddings and using cosine similarity (cutoff >0.7) semantic search
+ - This expands the word database significantly, it is a lot more than 9000 now because we search for contextual meaning
+- I need to add expressive fingerspelling functionality for the software 
+
 ## Sunday, May 5th
 - Downloaded over 10,000 videos of ASL words
 - Parsed all viable videos into points, and stored in a PostgreSQL database
