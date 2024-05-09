@@ -78,18 +78,37 @@ class Recognition:
 
     def fix_misrecognition(self, letter: str, points: np.ndarray, hand: str):
 
-        if letter in ["A", "M", "N", "S", "T"]:
+        if letter in ["A", "T"]:
             thumb_tip = points[0][4]
+            thumb_middle = points[0][3]
             index_tip = points[0][8]
             if hand == "left":
-                if thumb_tip[0] > index_tip[0]:
+                if thumb_tip[0] > index_tip[0] and thumb_middle[0] > index_tip[0]:
                     letter = "A"
                 else:
                     letter = "T"
             else:
-                if thumb_tip[0] < index_tip[0]:
+                if thumb_tip[0] < index_tip[0] and thumb_middle[0] < index_tip[0]:
                     letter = "A"
                 else:
                     letter = "T"
+
+        if letter in ["D", "I"]:
+            index_tip = points[0][8]
+            pinky_tip = points[0][20]
+
+            if index_tip[1] > pinky_tip[1]:
+                letter = "I"
+            else:
+                letter = "D"
+
+        if letter in ["F", "W"]:
+            index_tip = points[0][8]
+            pinky_tip = points[0][20]
+
+            if index_tip[1] > pinky_tip[1]:
+                letter = "F"
+            else:
+                letter = "W"
 
         return letter
