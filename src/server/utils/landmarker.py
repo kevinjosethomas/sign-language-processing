@@ -55,16 +55,14 @@ class Landmarker:
                 [(landmark.x, landmark.y, landmark.z) for landmark in hand.landmark]
             )
         )
-        world_points = [
-            (landmark.x, landmark.y, landmark.z)
-            for landmark in results.multi_hand_world_landmarks[0].landmark
-        ]
+        handedness = results.multi_handedness[0].classification[0].label.lower()
+
         return (
             True,
             image,
             points,
-            world_points,
             (hand.landmark[0].x, hand.landmark[0].y),
+            handedness,
         )
 
     def normalize_points(self, points):

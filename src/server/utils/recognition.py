@@ -17,8 +17,8 @@ class Recognition:
 
     def process(self, image: np.ndarray):
 
-        success, image, points, world_points, first_landmark = (
-            self.landmarker.draw_landmarks(image)
+        success, image, points, first_landmark, hand = self.landmarker.draw_landmarks(
+            image
         )
 
         # If a hand is detected in the frame
@@ -26,6 +26,7 @@ class Recognition:
 
             added_letter = False
             letter, probability = self.classifier.classify(points)
+            letter = self.fix_misrecognition(letter, points, hand)
             Store.raw_letters.append(letter)
 
             # Ensure the alphabet classification probability is larger than the minimum confidence
@@ -73,4 +74,22 @@ class Recognition:
         if different:
             Store.parse(output)
 
-        return (image, different, world_points if success else None)
+        return (image, different, points if success else None)
+
+    def fix_misrecognition(self, letter: str, points: np.ndarray, hand: str):
+
+        if letter in ["A", "M", "N", "S", "T"]:
+            thumb_tip = points[0][4]
+            index_tip = points[0][8]
+            if hand == "left":
+                if thumb_tip[0] > index_tip[0]:
+                    letter = "A"
+                else:
+                    letter = "T"
+            else:
+                if thumb_tip[0] < index_tip[0]:
+                    letter = "A"
+                else:
+                    letter = "T"
+
+        return letter

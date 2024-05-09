@@ -24,7 +24,7 @@ hand_tools = mp.solutions.hands
 hand_model = hand_tools.Hands()
 
 
-videos = os.listdir("../data/signs/videos/")[6960:]
+videos = os.listdir("../data/signs/videos/")
 
 
 bar = tqdm(total=len(videos))
