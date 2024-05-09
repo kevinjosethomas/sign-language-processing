@@ -5,6 +5,12 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 ## Wednesday, May 7th
 - I just realized I can probably use if statements to fix errors between commonly misrecognized letters like A-M-N-S-T by checking the location of important points like the thumb
+- Updated my ASL teacher with all the new additions
+  - To my surprise, the ThreeJS point sign visualization might actually be better than an actual 3d human model signing the words. The line avatar makes it easier to see each individual finger and their positioning.
+  - Transcriptions also need to be more contextual, because right now its a direct translation of English. So for example, I said "*I like soccer*" and it used the sign 'like' in the context of "*We look like we play soccer*". I need to think of how this can be done? Probably building on top of the existing semantic search?
+  - I will also demo the project to some Deaf students and teachers in my school so I can get some more direct applicable feedback and improvements! Hopefully they like it!
+  - I also told her about the amount of hackathons and tech talent that goes into ASL and accessibility technology... I'm not sure why there still isn't a viable ASL translation service!
+  - Also told her about some of my ideas of: live interpretation added to a video camera, ASL transcription for YouTube videos, and other cool things!
 
 
 ## Monday, May 6th
