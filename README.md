@@ -48,8 +48,8 @@ ASL wasn't like any of the other languages I had attempted to learn before: It w
 
 Below, on the left is the typical flow of conversation between two people speaking the same language. On the right is the typical flow of a conversation between two individuals who speak different languages. In between them, is either a tool that can translate between the two languages (Google Translate) or a person who knows both languages and serves as a translator. This is also the role an ASL interpreter plays in a typical conversation between a Deaf and hearing individual.
 
-<img height="204" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/17ae9b66-0005-4f37-95f4-dddd168d582f" />
-<img height="204" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/43a07102-7a0b-4115-b75d-3b6131d44a7b" />
+<img height="167" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/17ae9b66-0005-4f37-95f4-dddd168d582f" />
+<img height="167" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/43a07102-7a0b-4115-b75d-3b6131d44a7b" />
 &ensp;
 
 In contrast, below is the typical flow of conversation between a Deaf and hearing individual when an interpreter is not present. The most commonly utilized process is writing/typing to communicate, or using a TTS/STT tool that assists the hearing individual.
