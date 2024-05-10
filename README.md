@@ -75,6 +75,10 @@ The goal of this project has been to slowly eliminate the extra steps that Deaf 
 ## Technology
 
 ### Receptive
+<img width="1620" alt="Training" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/5df6c3ed-c06a-48f2-800d-318a4b63925d">
+
+<img width="1986" alt="Inference" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/209b75c8-da4a-4d16-8f9b-a9237d89bcd0">
+
 
 ### Expressive
 
