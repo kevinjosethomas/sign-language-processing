@@ -22,7 +22,9 @@ This project is a prototype that enables translation between American Sign Langu
 
 ### Motivation
 
-When I moved to Vancouver in 2021, I was given the unique opportunity to study a new kind of language — a visual language — in my high school. 
+For over eight years, I tried learning multiple languages, from Sanskrit and Spanish to Hindi and French, yet I could barely maintain a fluent conversation in any of them. When I moved to Vancouver in 2021, I joined Burnaby South Secondary School, which shares its campus with the British Columbia Secondary School for the Deaf (BCSD). This gave me the unique opportunity to study a new kind of language – a visual language – in high school.
+
+ASL wasn't like any of the other languages I had attempted to learn before: It wasn't just about words or pronunciation, but rather learning how to fully express yourself without the tools you typically use. While I still definitely wasn't the best ASL learner, our curriculum also included important aspects of Deaf culture. Over the last three years, our ASL class has shown me how I take communication for granted and also helped me notice the many hurdles that are faced by the Deaf community in our hearing-centric society. From my first week at Burnaby South to simply volunteering at our graduation ceremony, I have had a few experiences that suddenly remind me of the things I learn in ASL class and the reasons our ASL teacher teaches them. The [mission](#mission) below is ultimately what I hope to achieve with this project.
 
 ### Mission
 
