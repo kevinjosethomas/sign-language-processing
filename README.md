@@ -103,7 +103,7 @@ By using these points instead of images of hands (like I previously tried!), the
 
 To ensure that the model is not affected by variations in hand sizes, I normalize each point to be relative to the bounds of the hand itself. When training the model, this provides more standardized data that will help increase accuracy and reliability.
 
-## Classification
+### Classification
 
 Once hand landmarks are captured, the data is fed into a Keras PointNet model, which I trained on over 120,000 labelled images of ASL fingerspelling. PointNet is a deep learning model architecture developed with the intent of classifying 3D point clouds, similar to how the detected hands are now represented.
 
@@ -113,12 +113,13 @@ The PointNet model classifies the input data into one of the ASL alphabet signs,
 &ensp;
 
 
-## Synthesis
+### Synthesis
 The final stage synthesizes the classified characters into coherent words and sentences. This involves error correction to adjust for common misrecognition, as well as contextual synthesis to form sentences based on the classified letters.
 
 First, the program uses conditionals to differentiate between commonly misrecognized letters. For instance, the letters A-T-M-N-S are commonly mistaken for each other, and this can be fixed by checking the relative positioning of certain key coordinates (like the thumb). After ensuring the classified letter is accurate, the program ensures that the recognized letter has been demonstrated for multiple consecutive frames, to ensure that the alphabet is properly recognized. The program also ensures that the same letter is not recognized more than two times consecutively, preventing each individual frame from adding a letter to the synthesized text. Finally, it uses OpenAI's Completion API to synthesize the cleaned information into a meaningful sentence. This synthesis process also applies grammatical rules to form sentences that are syntactically correct in English.
 
 ## Expressive
+The expressive component of this project focuses on translating spoken English into ASL, which is visually represented through a 2D animated avatar using ThreeJS.
 
 # Usage
 
