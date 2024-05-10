@@ -28,6 +28,15 @@ ASL wasn't like any of the other languages I had attempted to learn before: It w
 
 ### Mission
 
+My goal for this project has changed as I have progressed, and my vision for it has grown over time. When I initially started working on simply recognizing individual ASL alphabets, I did not expect to get very far, let alone develop something capable of sustaining two-way communication between ASL and English. Regardless, I had one main goal for the project:
+- Once this project is sufficiently capable, I want to set up a desk/TV somewhere between the BCSD and Burnaby South hallways, or maybe even at the main entrance to our school. With the interface running on this device, I hope that students from BCSD and Burnaby South stop by to talk to each other without a human interpreter assisting the conversation. While this project is far from properly capturing all expressive aspects of ASL, I hope that the novelty of the fingerspell recognition and avatar visualization will bring some students together.
+
+Now, since the project is far more capable than it previously was, my vision for it has also grown:
+- I want to run an instance that is publicly accessible, so anyone in the world can just open a website and mess around with it. Ideally, it will draw more attention to ASL translation itself and people take the technology further. I also hope it encourages at least a few hearing individuals to look into ASL and consider learning the language. Maybe the platform will provide people with a fun and interactive method to learn the language.
+- I also want to modularize the code and make both the receptive and expressive aspects of the project function by themselves. While this project is mostly a proof of concept, I see many potential tools arising from this concept of ASL translation, and I want to work on developing some of them. Hopefully, it will also encourage more people to develop viable accessibility technology. If you happen to be interested in developing such technology, here are some of the potential projects that I have thought of during the development process:
+  - **ASL Interpreter Webcam Client:** A lightweight modular application that adds an ASL interpreter avatar to the top right of a user's webcam. It will sign all input from the microphone. This will allow people to join meetings or make YouTube videos with live English → ASL translation at no cost. This is already possible for more tech-savvy individuals, i.e. I implement it by adding an OBS Browser Source and serving a Virtual Camera.
+  - **ASL YouTube Captions:** A browser extension that adds an ASL option for YouTube captions, essentially adding a 2d avatar to the top right that simply signs everything the YouTube video says. This will allow Deaf individuals to better experience YouTube videos if they prefer signs over captions.
+
 ## Language
 
 ### Translation
