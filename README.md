@@ -2,7 +2,7 @@ https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/8d3
 
 # ✌️ ASL ⭤ English Translation with MediaPipe, PointNet, ThreeJS and Semantic Search
 
-American Sign Language (ASL) is a complete, natural language that exhibits the same linguistic complexities as spoken languages, including its own syntax, morphology, and grammar that significantly differ from English. Most existing tools that aim to bridge ASL and English often prioritize the needs of hearing individuals, simply offering Text-to-Speech (TTS) and Speech-to-Text capabilities (STT), developed under the misconception that ASL is an identical language to English. When Deafness is viewed as a "disability", most of these *translation* tools are developed to assist with the inability to hear, but not to assist with the actual translation process.
+American Sign Language (ASL) is a complete, natural language that exhibits the same linguistic complexities as spoken languages, including its own syntax, morphology, and grammar that significantly differ from English. Most existing tools that aim to bridge ASL and English often prioritize the needs of hearing individuals, simply offering Text-to-Speech (TTS) and Speech-to-Text capabilities (STT), developed under the misconception that ASL is an identical language to English. When Deafness is viewed as a "disability", most of these *translation* tools are developed to assist deafness as a disability, but not as a culture or as a language. 
 
 This project is a prototype that enables translation between American Sign Language (ASL) and English, facilitating communication between ASL signers and individuals who do not understand ASL. It is still far from fully translating the nuances of visual language, but it is designed to respect and preserve ASL as the primary language. The interface provides two main functionalities:
 
@@ -48,7 +48,7 @@ ASL wasn't like any of the other languages I had attempted to learn before: It w
 
 Below, on the left is the typical flow of conversation between two people speaking the same language. On the right is the typical flow of a conversation between two individuals who speak different languages. In between them, is either a tool that can translate between the two languages (Google Translate) or a person who knows both languages and serves as a translator. This is also the role an ASL interpreter plays in a typical conversation between a Deaf and hearing individual.
 
-<img height="167" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/17ae9b66-0005-4f37-95f4-dddd168d582f" />
+<img height="167" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/a001e197-0992-40c3-9866-805eb74092ed" />
 <img height="167" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/43a07102-7a0b-4115-b75d-3b6131d44a7b" />
 &ensp;
 
@@ -59,16 +59,15 @@ In contrast, below is the typical flow of conversation between a Deaf and hearin
 
 The idea that ASL is merely a visual representation of English is a widespread misconception. In reality, ASL is a distinct language with its own syntax, grammar, and cultural nuances that differ significantly from spoken English. Most existing direct translation tools, similar to the writing/typing translation process I visualized above, are built with this understanding, failing to capture the depth of ASL communication. Furthermore, these tools put an even larger burden on the Deaf individual, requiring them to accommodate and adapt to meet the needs of the hearing individual.
 
-Imagine speaking English and not being able to hear what you say. While some ASL signers do have a grasp of English, it is not their first language, and it is often incredibly hard to constantly translate thoughts from ASL into English, and vice-versa. Essentially, most of these translation tools simply transcribe text, and don't serve any real "translation" purpose. They are built to assist deafness as a disability, but not as a culture or as a language. 
+While some ASL signers do have a grasp of English, it is not their first language, and it is often incredibly hard to constantly translate thoughts from ASL into English, and vice-versa. Essentially, most of these translation tools simply transcribe text, and don't serve any real "translation" purpose. They are built to assist deafness as a disability, but not as a culture or as a language. 
 
 On the left, I added a visual of the 5 fundamental parameters that define ASL, as well as some examples of each (there are hundreds!). On the right, I added an example of the grammatical difference between the same sentence in English and in ASL. I would recommend reading about ASL parameters [here](https://www.handspeak.com/learn/397/), and also about [ASL Gloss](https://www.handspeak.com/learn/3/) and [Grammar](https://www.handspeak.com/learn/37/).
 
-<img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/ad00cf3c-9690-4f1d-8cd5-c6f0ae645b0b" />
-
+<img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/a5255c8b-e09d-4338-89c9-f99c6a86c142" />
 <img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/fe4514ae-879d-4cb9-80c6-65ec6955eb22" />
 &ensp;
 
-The goal of this project has been to slowly eliminate the extra steps that Deaf people have to take because of how hearing-centric our society is. From the 4 extra steps visualized above, our tool eliminates three 3 steps to a sufficient degree. Here is the corresponding flow below:
+The goal of this project has been to slowly eliminate the extra steps that Deaf people have to take because of how hearing-centric our society is. From the 4 extra steps visualized above, our tool eliminates three 3 steps to a sufficient degree. Here is the new flow below:
 
 <img src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/b459cabf-850e-449b-9e0a-8c6086be7ba3" />
 
