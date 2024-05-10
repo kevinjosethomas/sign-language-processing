@@ -63,9 +63,9 @@ Imagine speaking English and not being able to hear what you say. While some ASL
 
 On the left, I added a visual of the 5 fundamental parameters that define ASL, as well as some examples of each (there are hundreds!). On the right, I added an example of the grammatical difference between the same sentence in English and in ASL. I would recommend reading about ASL parameters [here](https://www.handspeak.com/learn/397/), and also about [ASL Gloss](https://www.handspeak.com/learn/3/) and [Grammar](https://www.handspeak.com/learn/37/).
 
-<img height="365" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/ad00cf3c-9690-4f1d-8cd5-c6f0ae645b0b" />
+<img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/ad00cf3c-9690-4f1d-8cd5-c6f0ae645b0b" />
 
-<img height="365" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/fe4514ae-879d-4cb9-80c6-65ec6955eb22" />
+<img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/fe4514ae-879d-4cb9-80c6-65ec6955eb22" />
 &ensp;
 
 The goal of this project has been to slowly eliminate the extra steps that Deaf people have to take because of how hearing-centric our society is. From the 4 extra steps visualized above, our tool eliminates three 3 steps to a sufficient degree. Here is the corresponding flow below:
