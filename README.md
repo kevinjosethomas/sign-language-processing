@@ -32,12 +32,8 @@ This project is a prototype that enables translation between American Sign Langu
     - [Classification](#classification)
     - [Synthesis](#synthesis)
   - [Expressive](#expressive)
-- Usage
-  - Installation
-  - Execution
-  - Contributing
-  - [Future Work](#future-work)
-- Acknowledgements
+- [Future Work](#future-work)
+- [Acknowledgements](#acknowlegdements)
 
 
 # Motivation
