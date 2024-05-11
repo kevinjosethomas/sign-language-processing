@@ -70,6 +70,21 @@ def stream():
 def on_connect():
     print("Connected to client")
 
+    cursor = conn.cursor()
+    animations = []
+    embedding = model.encode("hello")
+    cursor.execute(
+        "SELECT word, points, (embedding <=> %s) AS cosine_similarity FROM signs ORDER BY cosine_similarity ASC LIMIT 1",
+        (embedding,),
+    )
+    result = cursor.fetchone()
+    if result and 1 - result[2] > 0.70:
+        animations.append(("hello", result[1]))
+
+    emit("words", animations)
+
+    cursor.close()
+
 
 @socketio.on("disconnect")
 def on_disconnect():
@@ -99,7 +114,7 @@ def on_word(words):
         else:
             animation = []
             for letter in word:
-                animation.extend(alphabet_frames.get(letter.upper(), []))
+                animation.extend(alphabet_frames.get(letter, []))
 
             for i in range(len(animation)):
                 animation[i][0] = i

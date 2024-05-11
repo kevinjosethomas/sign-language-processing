@@ -66,13 +66,19 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen flex flex-row gap-4 p-4">
-      <div className="flex flex-col gap-4">
-        <Camera />
-        <Transcription content={ASLTranscription} />
+      <div className="flex flex-col gap-4 items-center grow">
+        <h1 className="text-2xl">ASL Fingerspell → English</h1>
+        <div className="border w-full h-full flex-col flex rounded">
+          <Camera />
+          <Transcription content={ASLTranscription} />
+        </div>
       </div>
-      <div className="flex flex-col gap-4 grow">
-        <Visualization getNextWord={getNextWord} currentWord={currentWord} />
-        <Transcription content={transcript} />
+      <div className="flex flex-col gap-4 items-center grow">
+        <h1 className="text-2xl">English → ASL</h1>
+        <div className="border w-full h-full flex-col flex rounded">
+          <Visualization getNextWord={getNextWord} currentWord={currentWord} />
+          <Transcription content={transcript} />
+        </div>
       </div>
     </div>
   );

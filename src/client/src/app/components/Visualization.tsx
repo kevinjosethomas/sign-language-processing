@@ -12,7 +12,7 @@ export default function Visualization({
   return (
     <div
       id="canvas-container"
-      className="relative border rounded overflow-hidden h-[540px] bg-gradient-to-br from-neutral-800 to-neutral-950"
+      className="relative w-full border-b border-white border-opacity-20 overflow-hidden h-[540px] bg-gradient-to-br from-neutral-800 to-neutral-950"
     >
       <p className="text-4xl upper text-white absolute z-10 bottom-10 justify-center flex w-full">
         {currentWord}
