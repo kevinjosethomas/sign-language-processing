@@ -10,6 +10,7 @@ from sentence_transformers import SentenceTransformer
 
 from utils.store import Store
 from utils.recognition import Recognition
+import json
 
 load_dotenv()
 log = logging.getLogger("werkzeug")
@@ -29,6 +30,13 @@ conn = psycopg2.connect(
     port=5432,
 )
 register_vector(conn)
+
+alphabet_frames = {}
+
+for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+    file_path = os.path.join("alphabets", f"{letter}.json")
+    with open(file_path, "r") as file:
+        alphabet_frames[letter] = json.load(file)
 
 
 def recognize():
@@ -87,7 +95,15 @@ def on_word(words):
         )
         result = cursor.fetchone()
         if result and 1 - result[2] > 0.70:
-            animations.append((word, result[1]))
+            animations.append((word.upper(), result[1]))
+        else:
+            animation = []
+            for letter in word:
+                animation.extend(alphabet_frames.get(letter.upper(), []))
+
+            for i in range(len(animation)):
+                animation[i][0] = i
+            animations.append((f"fs-{word.upper()}", animation))
 
     emit("words", animations)
 
