@@ -107,7 +107,7 @@ To ensure that the model is not affected by variations in hand sizes, I normaliz
 
 Once hand landmarks are captured, the data is fed into a Keras PointNet model, which I trained on over 120,000 labelled images of ASL fingerspelling. PointNet is a deep learning model architecture developed with the intent of classifying 3D point clouds, similar to how the detected hands are now represented.
 
-The PointNet model classifies the input data into one of the ASL alphabet signs, except for J and Z, which include movement of the hand to properly express. Below is a demonstration of the training process and parameters, of the PointNet model.
+The PointNet model classifies the input data into one of the ASL alphabet signs (except for J and Z, which include movement of the hand to properly express). Below is a demonstration of the training process of the PointNet model.
 
 <img alt="Classification" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/5df6c3ed-c06a-48f2-800d-318a4b63925d">
 &ensp;
@@ -119,7 +119,11 @@ The final stage synthesizes the classified characters into coherent words and se
 First, the program uses conditionals to differentiate between commonly misrecognized letters. For instance, the letters A-T-M-N-S are commonly mistaken for each other, and this can be fixed by checking the relative positioning of certain key coordinates (like the thumb). After ensuring the classified letter is accurate, the program ensures that the recognized letter has been demonstrated for multiple consecutive frames, to ensure that the alphabet is properly recognized. The program also ensures that the same letter is not recognized more than two times consecutively, preventing each individual frame from adding a letter to the synthesized text. Finally, it uses OpenAI's Completion API to synthesize the cleaned information into a meaningful sentence. This synthesis process also applies grammatical rules to form sentences that are syntactically correct in English.
 
 ## Expressive
-The expressive component of this project focuses on translating spoken English into ASL, which is visually represented through a 2D animated avatar using ThreeJS.
+The expressive component of this project focuses on translating spoken English into ASL, which is visually represented through a 2D animated avatar using ThreeJS. Here is a demonstration of how the expressive aspect of the project works.
+
+<img src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/7fb66399-55ca-4233-a740-05bef3e1fd57" />
+
+The interface begins by using ``react-speech-recognition`` to transcribe spoken text into words (this can be replaced with OpenAI Whisper for more accuracy). When the speaker stops speaking for a certain amount of time, it transmits the transcription to the backend through websockets. The backend iterates through the words and creates embeddings for each of them. For each word, it queries the database using the cosine similarity function to determine if there are any words in the database that have a similar meaning to the spoken word. If there are no similar words in the database, it generates a fingerspelling animation using the individual letters in the word. After fetching all the animation points, it transmits them back to the client through websockets. The client then uses ThreeJS to accurately animate the points to control the 2D avatar that signs each word correspondingly.
 
 # Usage
 
