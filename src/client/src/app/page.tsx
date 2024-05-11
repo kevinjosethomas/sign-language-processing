@@ -9,6 +9,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import Camera from "./components/Camera";
+import { Slider } from "@/ui/components/Slider";
 import Transcription from "./components/Transcription";
 import Visualization from "./components/Visualization";
 
@@ -19,6 +20,7 @@ export default function Home() {
   const wordAnimationsToPlay = useRef<any>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
   const { transcript, resetTranscript } = useSpeechRecognition();
+  const [signingSpeed, setSigningSpeed] = useState<number>(45);
 
   const [ASLTranscription, setASLTranscription] = useState("");
 
@@ -67,17 +69,32 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-row gap-4 p-4">
       <div className="flex flex-col gap-4 items-center grow">
-        <h1 className="text-2xl">ASL Fingerspell → English</h1>
+        <h1 className="text-2xl text-white">ASL Fingerspell → English</h1>
         <div className="border w-full h-full flex-col flex rounded">
           <Camera />
           <Transcription content={ASLTranscription} />
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center grow">
-        <h1 className="text-2xl">English → ASL</h1>
+        <h1 className="text-2xl text-white">English → ASL</h1>
         <div className="border w-full h-full flex-col flex rounded">
-          <Visualization getNextWord={getNextWord} currentWord={currentWord} />
+          <Visualization
+            signingSpeed={signingSpeed}
+            getNextWord={getNextWord}
+            currentWord={currentWord}
+          />
           <Transcription content={transcript} />
+          <div className="py-4 px-4 flex flex-col items-start gap-2 bg-white bg-opacity-10">
+            <p className="text-lg text-white">Signing Speed</p>
+            <Slider
+              defaultValue={[signingSpeed]}
+              value={[signingSpeed]}
+              onValueChange={(value) => setSigningSpeed(value[0])}
+              min={20}
+              max={100}
+              step={1}
+            />
+          </div>
         </div>
       </div>
     </div>

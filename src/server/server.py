@@ -110,11 +110,11 @@ def on_word(words):
         )
         result = cursor.fetchone()
         if result and 1 - result[2] > 0.70:
-            animations.append((word.upper(), result[1]))
+            animations.append((word, result[1]))
         else:
             animation = []
             for letter in word:
-                animation.extend(alphabet_frames.get(letter, []))
+                animation.extend(alphabet_frames.get(letter.upper(), []))
 
             for i in range(len(animation)):
                 animation[i][0] = i

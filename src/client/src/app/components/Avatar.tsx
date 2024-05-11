@@ -3,7 +3,13 @@ import { useThree, useFrame } from "@react-three/fiber";
 
 import { drawPoint, connectHands, connectPose } from "./lib";
 
-export default function Avatar({ getNextWord }: { getNextWord: () => any }) {
+export default function Avatar({
+  signingSpeed,
+  getNextWord,
+}: {
+  signingSpeed: number;
+  getNextWord: () => any;
+}) {
   const { camera } = useThree();
 
   const start_time = useRef(0);
@@ -12,7 +18,7 @@ export default function Avatar({ getNextWord }: { getNextWord: () => any }) {
 
   useFrame(({ clock, scene }) => {
     const elapsed = clock.getElapsedTime() - start_time.current;
-    const frame_index = Math.floor(elapsed * 45);
+    const frame_index = Math.floor(elapsed * signingSpeed);
 
     if (frame_index !== previous_frame.current) {
       previous_frame.current = frame_index;

@@ -3,9 +3,11 @@ import { Canvas } from "@react-three/fiber";
 import Avatar from "./Avatar";
 
 export default function Visualization({
+  signingSpeed,
   getNextWord,
   currentWord,
 }: {
+  signingSpeed: number;
   getNextWord: () => string | null;
   currentWord: string;
 }) {
@@ -18,7 +20,7 @@ export default function Visualization({
         {currentWord}
       </p>
       <Canvas>
-        <Avatar getNextWord={getNextWord} />
+        <Avatar signingSpeed={signingSpeed} getNextWord={getNextWord} />
       </Canvas>
     </div>
   );
