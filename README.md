@@ -119,19 +119,14 @@ The final stage synthesizes the classified characters into coherent words and se
 First, the program uses conditionals to differentiate between commonly misrecognized letters. For instance, the letters A-T-M-N-S are commonly mistaken for each other, and this can be fixed by checking the relative positioning of certain key coordinates (like the thumb). After ensuring the classified letter is accurate, the program ensures that the recognized letter has been demonstrated for multiple consecutive frames, to ensure that the alphabet is properly recognized. The program also ensures that the same letter is not recognized more than two times consecutively, preventing each individual frame from adding a letter to the synthesized text. Finally, it uses OpenAI's Completion API to synthesize the cleaned information into a meaningful sentence. This synthesis process also applies grammatical rules to form sentences that are syntactically correct in English.
 
 ## Expressive
-The expressive component of this project focuses on translating spoken English into ASL, which is visually represented through a 2D animated avatar using ThreeJS. Here is a demonstration of how the expressive aspect of the project works.
+The expressive component of this project focuses on translating spoken English into ASL, which is visually represented through a 2D animated avatar using ThreeJS.
+
+
+To begin, I created a database of over 9000+ words and their corresponding ASL signs. Once again, I used MediaPipe's Pose and Hand Landmark Models to identify body points for each frame in videos of these signs. Furthermore, I also used the ``all-MiniLM-L6-v2`` model to create embeddings for each word. I stored all words, their corresponding embeddings, and their corresponding ASL sign point animations in a PostgreSQL database using ``pgvector``. Although the database only has about 9500 words, using cosine similarity for semantic search allows me to drastically increase the word count by using contextually similar signs to replace certain words. Here is a demonstration of how the expressive aspect of the project works:
 
 <img src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/7fb66399-55ca-4233-a740-05bef3e1fd57" />
 
 The interface begins by using ``react-speech-recognition`` to transcribe spoken text into words (this can be replaced with OpenAI Whisper for more accuracy). When the speaker stops speaking for a certain amount of time, it transmits the transcription to the backend through websockets. The backend iterates through the words and creates embeddings for each of them. For each word, it queries the database using the cosine similarity function to determine if there are any words in the database that have a similar meaning to the spoken word. If there are no similar words in the database, it generates a fingerspelling animation using the individual letters in the word. After fetching all the animation points, it transmits them back to the client through websockets. The client then uses ThreeJS to accurately animate the points to control the 2D avatar that signs each word correspondingly.
-
-# Usage
-
-## Installation
-
-## Execution
-
-## Contributing
 
 # Future Work
 
