@@ -20,7 +20,7 @@ export default function Home() {
   const wordAnimationsToPlay = useRef<any>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
   const { transcript, resetTranscript } = useSpeechRecognition();
-  const [signingSpeed, setSigningSpeed] = useState<number>(45);
+  const [signingSpeed, setSigningSpeed] = useState<number>(50);
 
   const [ASLTranscription, setASLTranscription] = useState("");
 
@@ -48,7 +48,7 @@ export default function Home() {
       currentWords.current = [...transcript.toLowerCase().split(" ")];
       resetTranscript();
       socket.emit("words", currentWords.current);
-    }, 1500);
+    }, 500);
 
     return () => {
       clearTimeout(timeout);
