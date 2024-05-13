@@ -3,7 +3,21 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
-## Wednesday, May 7th
+## Thursday, May 10th
+- Finished sections of README:
+  - Technology (Expressive)
+  - Technology (Receptive)
+- Added fingerspelling capability to the expressive avatar
+- Added customizable signing speed to the interface
+- Reorganized the interface
+
+## Thursday, May 9th
+- Finished sections of README:
+  - Introduction
+  - Motivation
+  - Language 
+
+## Wednesday, May 8th
 - I just realized I can probably use if statements to fix errors between commonly misrecognized letters like A-M-N-S-T by checking the location of important points like the thumb
 - Updated my ASL teacher with all the new additions
   - To my surprise, the ThreeJS point sign visualization might actually be better than an actual 3d human model signing the words. The line avatar makes it easier to see each individual finger and their positioning.
