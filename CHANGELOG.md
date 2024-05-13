@@ -3,6 +3,9 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Sunday, May 12th
+- Spent 4 hours filming a [demo video](https://www.youtube.com/watch?v=FJ7Q0MBKTe8&list=PLLdZCssCx2S2QwH1CEPROA8DjPnQpv05C&index=3)
+
 ## Thursday, May 10th
 - Finished sections of README:
   - Technology (Expressive)
