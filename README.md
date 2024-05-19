@@ -32,11 +32,11 @@ This project is a prototype that enables translation between American Sign Langu
     - [Synthesis](#synthesis)
   - [Expressive](#expressive)
 - [Future Work](#future-work)
- - [Limitations](#limitations)
- - [Vision](#vision)
+  - [Limitations](#limitations)
+  - [Vision](#vision)
 - [Acknowledgements](#acknowledgements)
- - [People](#people)
- - [Projects](#projects)
+  - [People](#people)
+  - [Projects](#projects)
 
 
 # Motivation
