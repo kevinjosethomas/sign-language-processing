@@ -16,7 +16,6 @@ import Visualization from "./components/Visualization";
 const socket = io("ws://localhost:1234");
 
 export default function Home() {
-  const currentWords = useRef<string[]>([]);
   const wordAnimationsToPlay = useRef<any>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -45,10 +44,9 @@ export default function Home() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      currentWords.current = [...transcript.toLowerCase().split(" ")];
+      socket.emit("words", transcript.toLowerCase());
       resetTranscript();
-      socket.emit("words", currentWords.current);
-    }, 1000);
+    }, 2000);
 
     return () => {
       clearTimeout(timeout);

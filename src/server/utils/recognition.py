@@ -68,7 +68,7 @@ class Recognition:
                 thread = threading.Thread(target=LLM.fix)
                 thread.start()
 
-        output = (" ".join(Store.transcription) + " " + Store.raw_word).strip()
+        output = (" ".join(Store.raw_transcription) + " " + Store.raw_word).strip()
 
         different = output != Store.parsed
         if different:

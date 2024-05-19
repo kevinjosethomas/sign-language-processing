@@ -8,11 +8,13 @@ from flask_socketio import SocketIO, emit
 from pgvector.psycopg2 import register_vector
 from sentence_transformers import SentenceTransformer
 
+from utils.llm import LLM
 from utils.store import Store
 from utils.recognition import Recognition
 import json
 
 load_dotenv()
+llm = LLM()
 log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 
@@ -86,16 +88,27 @@ def on_connect():
     cursor.close()
 
 
+@socketio.on("clear")
+def on_clear():
+    print("Clearing the store")
+    Store.reset()
+
+
 @socketio.on("disconnect")
 def on_disconnect():
     print("Disconnected from client")
-    Store.reset()
 
 
 @socketio.on("words")
 def on_word(words):
 
     animations = []
+    words = words.strip()
+
+    if not words:
+        return
+
+    words = llm.gloss(words)
     cursor = conn.cursor()
     for word in words:
 

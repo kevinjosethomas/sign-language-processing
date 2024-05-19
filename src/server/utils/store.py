@@ -11,8 +11,7 @@ class Store:
 
     @classmethod
     def reset(cls):
-        cls.raw_word = ""
-        cls.raw_letters = []
-        cls.raw_transcription = []
-        cls.transcription = []
-        cls.parsed = ""
+        cls.raw_word = ""  # current word being parsed
+        cls.raw_letters = []  # every letter in every frame
+        cls.raw_transcription = []  # raw transcription, every word is an element
+        cls.parsed = ""  # final parsed transcription
