@@ -20,7 +20,7 @@ log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
-camera = cv2.VideoCapture(2)
+camera = cv2.VideoCapture(1)
 recognition = Recognition()
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -71,6 +71,7 @@ def stream():
 @socketio.on("connect")
 def on_connect():
     print("Connected to client")
+    emit("transcription", Store.parsed)
 
     cursor = conn.cursor()
     animations = []
@@ -92,6 +93,7 @@ def on_connect():
 def on_clear():
     print("Clearing the store")
     Store.reset()
+    emit("transcription", Store.parsed)
 
 
 @socketio.on("disconnect")

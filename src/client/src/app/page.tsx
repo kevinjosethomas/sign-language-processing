@@ -64,17 +64,29 @@ export default function Home() {
     return animation[1];
   }
 
+  function clear() {
+    socket.emit("clear");
+  }
+
   return (
     <div className="w-screen h-screen flex flex-row gap-4 p-4">
       <div className="flex flex-col gap-4 items-center grow">
-        <h1 className="text-2xl text-white">ASL Fingerspell → English</h1>
+        <h1 className="text-2xl text-white">English → ASL</h1>
         <div className="border w-full h-full flex-col flex rounded">
           <Camera />
           <Transcription content={ASLTranscription} />
+          <div className="py-4 px-4 flex items-center justify-end gap-2 bg-white bg-opacity-10">
+            <div
+              onClick={clear}
+              className="px-4 py-1 border-white border-opacity-20 border rounded hover:bg-white hover:bg-opacity-10 transition duration-300 cursor-pointer"
+            >
+              <p className="text-white text-lg select-none">Clear</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center grow">
-        <h1 className="text-2xl text-white">English → Signed Exact English</h1>
+        <h1 className="text-2xl text-white">English → ASL</h1>
         <div className="border w-full h-full flex-col flex rounded">
           <Visualization
             signingSpeed={signingSpeed}
