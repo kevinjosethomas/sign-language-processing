@@ -32,7 +32,11 @@ This project is a prototype that enables translation between American Sign Langu
     - [Synthesis](#synthesis)
   - [Expressive](#expressive)
 - [Future Work](#future-work)
-- [Acknowledgements](#acknowlegdements)
+ - [Limitations](#limitations)
+ - [Vision](#vision)
+- [Acknowledgements](#acknowledgements)
+ - [People](#people)
+ - [Projects](#projects)
 
 
 # Motivation
@@ -96,7 +100,7 @@ By using these points instead of images of hands (like I previously tried!), the
 2. It only needs to process a set of 63 numbers (3 for each point!) for each frame instead of an entire image, making it significantly more efficient for real-time use
 3. It looks a lot cooler
 
-To ensure that the model is not affected by variations in hand sizes, I normalize each point to be relative to the bounds of the hand itself. When training the model, this provides more standardized data that will help increase accuracy and reliability.
+To ensure that the model is not affected by distance from the camera, I normalize each point to be relative to the bounds of the hand itself. When training the model, this provides more standardized data that will help increase accuracy and reliability.
 
 ### Classification
 
@@ -107,11 +111,22 @@ The PointNet model classifies the input data into one of the ASL alphabet signs 
 <img alt="Classification" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/5df6c3ed-c06a-48f2-800d-318a4b63925d">
 &ensp;
 
+I started out by downloading multiple ASL Fingerspell datasets from Kaggle: [One](https://www.kaggle.com/datasets/lexset/synthetic-asl-alphabet) [Two](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test) [Three](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
+
+I used MediaPipe to identify hand landmarks on every image in the three datasets. Subsequently, I normalized the landmarks and stored the point clouds in NumPy files, creating a combined augmented dataset. Below is a visualized form of the point cloud dataset
+<img width="1136" alt="image" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/d2f87230-199d-4dec-bf96-30945d2c5830">
+
+Once I had the augmented dataset, I trained a PointNet model on it. So far, I've trained the model around 6 times, playing with parameters, mostly adjusting epoch count, bath size, and learning rate. Here is training information from the most accurate model currently trained:
+
+<img alt="image" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/af4472da-8737-4766-bdbb-3412ea4f3274">
+<img alt="image" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/7f892d1a-f8d2-4685-a09a-74130fd124d2">
+
+As seen in the confusion matrix, similar fingerspelled alphabets like K-V, U-R and E-S are often misclassified for each other. This is expected and can be improved with additional training data. There also seems to be an issue in the validation data, as seen in a sudden spike in validation loss in one of the epochs.
 
 ### Synthesis
 The final stage synthesizes the classified characters into coherent words and sentences. This involves error correction to adjust for common misrecognition, as well as contextual synthesis to form sentences based on the classified letters.
 
-First, the program uses conditionals to differentiate between commonly misrecognized letters. For instance, the letters A-T-M-N-S are commonly mistaken for each other, and this can be fixed by checking the relative positioning of certain key coordinates (like the thumb). After ensuring the classified letter is accurate, the program ensures that the recognized letter has been demonstrated for multiple consecutive frames, to ensure that the alphabet is properly recognized. The program also ensures that the same letter is not recognized more than two times consecutively, preventing each individual frame from adding a letter to the synthesized text. Finally, it uses OpenAI's Completion API to synthesize the cleaned information into a meaningful sentence. This synthesis process also applies grammatical rules to form sentences that are syntactically correct in English.
+First, the program uses conditionals to differentiate between commonly misrecognized letters. For instance, the letters A-T-M-N-S are commonly mistaken for each other, and this can be fixed by checking the relative positioning of certain key coordinates (like the thumb). After ensuring the classified letter is accurate, the program ensures that the recognized letter has been demonstrated for multiple consecutive frames, to ensure that the alphabet is properly recognized. The program also ensures that the same letter is not recognized more than two times consecutively, preventing each individual frame from adding a letter to the synthesized text. Finally, it uses an LLM to synthesize the cleaned information into a meaningful sentence. This synthesis process also applies grammatical rules to form sentences that are syntactically correct in English.
 
 ## Expressive
 The expressive component of this project focuses on translating spoken English into ASL, which is visually represented through a 2D animated avatar using ThreeJS.
@@ -121,17 +136,38 @@ To begin, I created a database of over 9000+ words and their corresponding ASL s
 
 <img src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/7fb66399-55ca-4233-a740-05bef3e1fd57" />
 
-The interface begins by using ``react-speech-recognition`` to transcribe spoken text into words (this can be replaced with OpenAI Whisper for more accuracy). When the speaker stops speaking for a certain amount of time, it transmits the transcription to the backend through websockets. The backend iterates through the words and creates embeddings for each of them. For each word, it queries the database using the cosine similarity function to determine if there are any words in the database that have a similar meaning to the spoken word. If there are no similar words in the database, it generates a fingerspelling animation using the individual letters in the word. After fetching all the animation points, it transmits them back to the client through websockets. The client then uses ThreeJS to accurately animate the points to control the 2D avatar that signs each word correspondingly.
+The interface begins by using ``react-speech-recognition`` to transcribe spoken text into words (this can be replaced with OpenAI Whisper for more accuracy). When the speaker stops speaking for a certain amount of time, it transmits the transcription to the backend through websockets. The backend iterates through the words and creates embeddings for each of them. For each word, it queries the database using the cosine similarity function to fetch the animation of the sign with the closest meaning to the spoken word. If there are no similar signs in the database, it generates a fingerspelling animation using the individual letters in the word. After fetching all the animation points, it transmits them back to the client through websockets. The client then uses ThreeJS to accurately animate the points to control the 2D avatar that signs each word correspondingly.
+
+
 
 # Future Work
+
+## Limitations
+- As seen [above](#language), out of the four fundamental obstacles that are present in ASL ⭤ English translation, this project only solves three to a sufficient degree. ASL signers still need to fingerspell words to actually communicate information. Fingerspelling only accounts for 25-30% of signed ASL
+- The receptive model is still not perfect, and can definitely be improved with more training data and ML expertise
+- The expressive part of the project still doesn't convey all five parameters of ASL, and is simply a stick figure that might be hard to comprehend
+
+## Vision
+- Use RNNs/LSTMs might be a potential way to interpret ASL signs (instead of just fingerspelling)
+- Rig and control a 3D model that is used to express ASL, instead of a simple 2D stick figure
 
 My goal for this project has changed as I have progressed, and my vision for it has grown over time. When I initially started working on simply recognizing individual ASL alphabets, I did not expect to get very far, let alone develop something capable of sustaining two-way communication between ASL and English. Regardless, I had one main goal for the project:
 - Once this project is sufficiently capable, I want to set up a desk/TV somewhere between the BCSD and Burnaby South hallways, or maybe even at the main entrance to our school. With the interface running on this device, I hope that students from BCSD and Burnaby South stop by to talk to each other without a human interpreter assisting the conversation. While this project is far from properly capturing all expressive aspects of ASL, I hope that the novelty of the fingerspell recognition and avatar visualization will bring some students together.
 
-Now, since the project is far more capable than it previously was, my vision for it has also grown:
-- I want to run an instance that is publicly accessible, so anyone in the world can just open a website and mess around with it. Ideally, it will draw more attention to ASL translation itself and people take the technology further. I also hope it encourages at least a few hearing individuals to look into ASL and consider learning the language. Maybe the platform will provide people with a fun and interactive method to learn the language.
+Now, since the project is more capable, my vision for it has also grown:
+- I want to run an instance that is publicly accessible, so anyone in the world can just open a website and mess around with it. Ideally, it will draw more attention to ASL translation itself and people take the technology further. I also hope it encourages more people to look into ASL and consider learning the language. Maybe the platform will provide people with a fun and interactive method to learn the language.
 - I also want to modularize the code and make both the receptive and expressive aspects of the project function by themselves. While this project is mostly a proof of concept, I see many potential tools arising from this concept of ASL translation, and I want to work on developing some of them. Hopefully, it will also encourage more people to develop viable accessibility technology. If you happen to be interested in developing such technology, here are some of the potential projects that I have thought of during the development process:
-  - **ASL Interpreter Webcam Client:** A lightweight modular application that adds an ASL interpreter avatar to the top right of a user's webcam. It will sign all input from the microphone. This will allow people to join meetings or make YouTube videos with live English → ASL translation at no cost. This is already possible for more tech-savvy individuals, i.e. I implement it by adding an OBS Browser Source and serving a Virtual Camera.
-  - **ASL YouTube Captions:** A browser extension that adds an ASL option for YouTube captions, essentially adding a 2d avatar to the top right that simply signs everything the YouTube video says. This will allow Deaf individuals to better experience YouTube videos if they prefer signs over captions.
+  - **ASL Interpreter Webcam Client:** A lightweight modular application that adds an ASL interpreter avatar to the top right of a user's webcam. It will sign all input from the microphone. This will allow people to join meetings or make YouTube videos with live English → ASL translation at no cost. This is already possible for more tech-savvy individuals, i.e. I implement it by adding an OBS Browser Source and serving it through a Virtual Camera.
+  - **ASL YouTube Captions:** A browser extension that adds an ASL option for YouTube captions, essentially adding a 2d avatar to the top right that simply signs everything that is said in the YouTube video. This will allow Deaf individuals to better experience YouTube videos if they prefer signs over captions.
+
 
 # Acknowledgements
+## People
+- My Computer Science Teacher, who is always excited about my projects and inspires me to do more, for sharing this project and doing their very best to find more opportunities for me to grow this project
+- My ASL Teacher, for always taking the time out of their day to provide me with feedback, insight, and guidance for improving this project. And also for finding amazing people and opportunities where I can get more feedback!
+- Ishir Rao, my (goated) childhood friend, for getting me interested in the AI/ML space and providing me with a starting point to get ahead!
+
+## Projects
+- These Kaggle datasets, where all my training data was augmented from: [One](https://www.kaggle.com/datasets/lexset/synthetic-asl-alphabet), [Two](https://www.kaggle.com/datasets/danrasband/asl-alphabet-test), [Three](https://www.kaggle.com/datasets/debashishsau/aslamerican-sign-language-aplhabet-dataset)
+- [The HandSpeak Project](https://www.handspeak.com/), for a lot of additional knowledge about the workings of ASL, as well as a source of sign language videos for the Expressive aspect of this project
+- [The SignWave Project](https://github.com/tan-ad/SignWave), an amazing tool developed by high-schoolers that provided me with my initial approach towards the Expressive aspect of this project
