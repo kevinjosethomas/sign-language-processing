@@ -21,8 +21,7 @@ This project is a prototype that enables translation between American Sign Langu
 # Table of Contents
 
 > [!NOTE]
-> As a hearing student with limited ASL proficiency, I recognize that my perspective as a hearing person is limited. This project would not have been possible without the active involvement and advice of Deaf individuals and ASL experts who have generously shared their insights. My role has been to listen carefully and integrate feedback from the Deaf community, and I have done my best to approach this project with a mindset of learning and understanding, rather than assuming. 
-
+> As a hearing student with limited ASL proficiency, I recognize that my perspective as a hearing person is limited. My role has been to listen carefully and integrate feedback from the Deaf community, and I have done my best to approach this project with a mindset of learning and understanding, rather than assuming. This project would not have been possible without the active involvement and advice of Deaf individuals and ASL experts who have generously shared their insights. Please see [acknowledgements](#acknowledgements). 
 
 - [Motivation](#motivation)
 - [Language](#language)
@@ -40,7 +39,7 @@ This project is a prototype that enables translation between American Sign Langu
 
 For over eight years, I tried learning multiple languages, from Sanskrit and Spanish to Hindi and French, yet I could barely maintain a fluent conversation in any of them. When I moved to Vancouver in 2021, I joined Burnaby South Secondary School, which shares its campus with the British Columbia Secondary School for the Deaf (BCSD). This gave me the unique opportunity to study a new kind of language – a visual language – in high school.
 
-ASL wasn't like any of the other languages I had attempted to learn before: It wasn't just about words or pronunciation, but rather learning how to fully express yourself without the tools you typically use. While I still definitely wasn't the best ASL learner, our curriculum also included important aspects of Deaf culture. Over the last three years, our ASL class has shown me how I take communication for granted and also helped me notice the many hurdles that are faced by the Deaf community in our hearing-centric society. From my very first week at Burnaby South, I have had a few experiences that suddenly remind me of the things I learn in ASL class and the reasons our ASL teacher teaches them. The [mission](#future-work) below is ultimately what I hope to achieve with this project.
+ASL wasn't like any of the other languages I had attempted to learn before: It wasn't just about words or pronunciation, but rather learning how to fully express yourself without the tools you typically use. Over the last three years, our ASL class has shown me how I take communication for granted and also helped me notice the many hurdles that are faced by the Deaf community in our hearing-centric society. From my very first week at Burnaby South, I have had many experiences that suddenly remind me of the reasons we learn about Deaf culture and accessibility in ASL class. The [mission](#future-work) below is ultimately what I hope to achieve with this project.
 
 
 # Language
@@ -58,15 +57,15 @@ In contrast, below is the typical flow of conversation between a Deaf and hearin
 
 The idea that ASL is merely a visual representation of English is a widespread misconception. In reality, ASL is a distinct language with its own syntax, grammar, and cultural nuances that differ significantly from spoken English. Most existing direct translation tools, similar to the writing/typing translation process I visualized above, are built with this understanding, failing to capture the depth of ASL communication. Furthermore, these tools put an even larger burden on the Deaf individual, requiring them to accommodate and adapt to meet the needs of the hearing individual.
 
-While some ASL signers do have a grasp of English, it is not their first language, and it is often incredibly hard to constantly translate thoughts from ASL into English, and vice-versa. Essentially, most of these translation tools simply transcribe text, and don't serve any real "translation" purpose. They are built to assist deafness as a disability, but not as a culture or as a language. 
+While ASL signers do have a grasp of English, it is often incredibly hard to constantly translate thoughts from ASL into English, and vice-versa. Essentially, most of these translation tools simply transcribe text, and don't serve any real "translation" purpose. They are built to assist deafness as a disability, but not as a culture or as a language. 
 
-On the left, I added a visual of the 5 fundamental parameters that define ASL, as well as some examples of each (there are hundreds!). On the right, I added an example of the grammatical difference between the same sentence in English and in ASL. I would recommend reading about [ASL Parameters](https://www.handspeak.com/learn/397/), and also about [ASL Gloss](https://www.handspeak.com/learn/3/) and [Grammar](https://www.handspeak.com/learn/37/).
+On the left, I added a visual of the 5 fundamental parameters that define ASL, as well as some examples of each (there are hundreds!). On the right, I added an example of the grammatical difference between the same sentence in English and in ASL. I would recommend reading about [ASL Parameters](https://www.handspeak.com/learn/397/), and also about [ASL Gloss](https://www.handspeak.com/learn/3/) & [Grammar](https://www.handspeak.com/learn/37/).
 
 <img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/a5255c8b-e09d-4338-89c9-f99c6a86c142" />
 <img height="300" src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/fe4514ae-879d-4cb9-80c6-65ec6955eb22" />
 &ensp;
 
-The goal of this project has been to slowly eliminate the extra steps that Deaf people have to take because of how hearing-centric our society is. From the 4 extra steps visualized above, our tool eliminates three 3 steps to a sufficient degree. Here is the new flow below:
+The goal of this project has been to eliminate the extra steps that Deaf people have to take because of how hearing-centric our society is. From the 4 extra steps visualized above, our tool eliminates three 3 steps to a sufficient degree. Here is the new flow below:
 
 <img src="https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/b459cabf-850e-449b-9e0a-8c6086be7ba3" />
 
