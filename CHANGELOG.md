@@ -3,6 +3,17 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Saturday, May 18th
+- Added training graphs and confusion matrix to README
+- Tweaked and finished editing README
+- Added gloss grammar to Expressive unit
+- Fixed bug where Receptive transcription would randomly disappear
+- Cleaned up Store class functionality, removed redundant variables
+
+## Tuesday, May 14th
+- Moved from GPT 3.5 Turbo to GPT 4O!
+- Messed around with OpenAI Whisper for transcription, did not succeed :(
+
 ## Sunday, May 12th
 - Spent 4 hours filming a [demo video](https://www.youtube.com/watch?v=FJ7Q0MBKTe8&list=PLLdZCssCx2S2QwH1CEPROA8DjPnQpv05C&index=3)
 
