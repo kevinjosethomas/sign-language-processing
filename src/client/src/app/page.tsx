@@ -13,7 +13,7 @@ import { Slider } from "@/ui/components/Slider";
 import Transcription from "./components/Transcription";
 import Visualization from "./components/Visualization";
 
-const socket = io("http://localhost:1234");
+const socket = io("ws://localhost:1234");
 
 export default function Home() {
   const currentWords = useRef<string[]>([]);
@@ -48,7 +48,7 @@ export default function Home() {
       currentWords.current = [...transcript.toLowerCase().split(" ")];
       resetTranscript();
       socket.emit("words", currentWords.current);
-    }, 500);
+    }, 1000);
 
     return () => {
       clearTimeout(timeout);
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center grow">
-        <h1 className="text-2xl text-white">English → ASL</h1>
+        <h1 className="text-2xl text-white">English → Signed Exact English</h1>
         <div className="border w-full h-full flex-col flex rounded">
           <Visualization
             signingSpeed={signingSpeed}
