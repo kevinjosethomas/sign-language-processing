@@ -14,7 +14,7 @@ hand_model = hand_tools.Hands()
 
 data = []
 frame_number = 0
-capture = cv2.VideoCapture(2)
+capture = cv2.VideoCapture(1)
 
 while capture.isOpened():
     success, frame = capture.read()
