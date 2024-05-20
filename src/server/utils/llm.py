@@ -32,7 +32,7 @@ class LLM:
         [
             (
                 "system",
-                "You are meant to convert text from English to ASL Gloss grammar. I will send you a phrase, please rephrase it "
+                "You are meant to convert text from English to ASL Gloss grammar. Do not change meaning or move periods. I will send you a phrase, please rephrase it "
                 "it to follow ASL grammar order: object, then subject, then verb. Remove words like IS and ARE that are not present in ASL. "
                 "Replace I with ME. Do not add classifiers. Everything should be English text. Please output nothing but the rephrased phrase.",
             ),
@@ -67,5 +67,7 @@ class LLM:
                 "transcription": raw_transcription,
             }
         )
+
+        print(response.content.strip())
 
         return response.content.strip().split()

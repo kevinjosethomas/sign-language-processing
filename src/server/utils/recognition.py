@@ -93,6 +93,16 @@ class Recognition:
                 else:
                     letter = "T"
 
+        # if letter == "K":
+        #     index_tip = points[0][8]
+        #     index_middle = points[0][7]
+        #     middle_tip = points[0][12]
+        #     middle_middle = points[0][11]
+
+        #     if index_tip[1] < index_middle[1] or middle_tip[1] < middle_middle[1]:
+        #         print(index_tip[1], index_middle[1], middle_tip[1], middle_middle[1])
+        #         letter = "I"
+
         if letter in ["D", "I"]:
             index_tip = points[0][8]
             pinky_tip = points[0][20]
