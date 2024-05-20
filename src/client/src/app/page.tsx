@@ -10,6 +10,7 @@ import SpeechRecognition, {
 
 import Camera from "./components/Camera";
 import { Slider } from "@/ui/components/Slider";
+import Checkbox from "@/ui/components/checkbox";
 import Transcription from "./components/Transcription";
 import Visualization from "./components/Visualization";
 
@@ -30,11 +31,11 @@ export default function Home() {
       console.log("Connected to server");
     });
 
-    socket.on("transcription", (data) => {
+    socket.on("R-TRANSCRIPTION", (data) => {
       setASLTranscription(data);
     });
 
-    socket.on("words", (animations) => {
+    socket.on("E-ANIMATION", (animations) => {
       wordAnimationsToPlay.current = [
         ...wordAnimationsToPlay.current,
         ...animations,
@@ -44,7 +45,7 @@ export default function Home() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      socket.emit("words", transcript.toLowerCase());
+      socket.emit("E-REQUEST-ANIMATION", transcript.toLowerCase());
       resetTranscript();
     }, 2000);
 
@@ -65,17 +66,18 @@ export default function Home() {
   }
 
   function clear() {
-    socket.emit("clear");
+    socket.emit("R-CLEAR-TRANSCRIPTION");
   }
 
   return (
     <div className="w-screen h-screen flex flex-row gap-4 p-4">
       <div className="flex flex-col gap-4 items-center grow">
-        <h1 className="text-2xl text-white">English → ASL</h1>
+        <h1 className="text-2xl text-white">ASL Fingerspell → English</h1>
         <div className="border w-full h-full flex-col flex rounded">
           <Camera />
           <Transcription content={ASLTranscription} />
-          <div className="py-4 px-4 flex items-center justify-end gap-2 bg-white bg-opacity-10">
+          <div className="py-4 px-4 flex items-center justify-end gap-4 bg-white bg-opacity-10">
+            <Checkbox label="Autocorrect" />
             <div
               onClick={clear}
               className="px-4 py-1 border-white border-opacity-20 border rounded hover:bg-white hover:bg-opacity-10 transition duration-300 cursor-pointer"
@@ -95,7 +97,10 @@ export default function Home() {
           />
           <Transcription content={transcript} />
           <div className="py-4 px-4 flex flex-col items-start gap-2 bg-white bg-opacity-10">
-            <p className="text-lg text-white">Signing Speed</p>
+            <div className="flex items-center justify-between w-full">
+              <p className="text-lg text-white">Signing Speed</p>
+              <Checkbox label="ASL Gloss" />
+            </div>
             <Slider
               defaultValue={[signingSpeed]}
               value={[signingSpeed]}
