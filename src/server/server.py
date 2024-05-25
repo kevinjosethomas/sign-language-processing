@@ -22,7 +22,7 @@ log.setLevel(logging.ERROR)
 llm = LLM()
 app = Flask(__name__)
 recognition = Recognition()
-camera = cv2.VideoCapture(1)
+camera = cv2.VideoCapture(2)
 socketio = SocketIO(app, cors_allowed_origins="*")
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 conn = psycopg2.connect(
@@ -115,6 +115,7 @@ def on_request_animation(words: str):
 
     # Gloss the words
     words = llm.gloss(words)
+    # words = words.split()
 
     cursor = conn.cursor()
     for word in words:

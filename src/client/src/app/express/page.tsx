@@ -23,11 +23,11 @@ export default function Home() {
     });
 
     socket.on("E-ANIMATION", (animations) => {
-      if (duration != "0") {
-        setSigningSpeed(
-          Math.floor(animations[0][1].length / parseFloat(duration))
-        );
-      }
+      // if (duration != "0") {
+      //   setSigningSpeed(
+      //     Math.floor(animations[0][1].length / parseFloat(duration))
+      //   );
+      // }
 
       wordAnimationsToPlay.current = [
         ...wordAnimationsToPlay.current,
