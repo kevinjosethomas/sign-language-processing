@@ -3,6 +3,21 @@ This document is a log of my daily progress in this project. I log my work on a 
 
 # Log
 
+## Thursday, May 23
+- Presented the project to Dr. Kathleen Hall and her team from UBC, as well as around 35 students from Burnaby South and BCSD
+- Cleaned up the presentation audio and video, posted it on YouTube: https://www.youtube.com/watch?v=EQmsFXrGXo0
+
+## Tuesday, May 21
+- Finished transcribing the video with the expressive ASL avatar
+- Finished editing first iteration of demo video
+
+## Monday, May 20th
+- Continued transcribing the video using the expressive avatar
+- Started editing the video
+
+## Sunday, May 19th
+- Started using the expressive interpreter to sign all content said in the demo video
+
 ## Saturday, May 18th
 - Added training graphs and confusion matrix to README
 - Tweaked and finished editing README
