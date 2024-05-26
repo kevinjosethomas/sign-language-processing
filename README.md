@@ -149,6 +149,7 @@ The interface begins by using ``react-speech-recognition`` to transcribe spoken 
 
 ## Vision
 - Use RNNs/LSTMs might be a potential way to interpret ASL signs (instead of just fingerspelling)
+- Look into using ASL parameters and databases like [ASL-LEX](https://asl-lex.org/) or [SLPAA](https://www.youtube.com/watch?v=o4C4hibTW1o) to narrow down a human signing into specific parameters (like location, orientation, erc) and then use a model to classify the sign
 - Rig and control a 3D model that is used to express ASL, instead of a simple 2D stick figure
 
 My goal for this project has changed as I have progressed, and my vision for it has grown over time. When I initially started working on simply recognizing individual ASL alphabets, I did not expect to get very far, let alone develop something capable of sustaining two-way communication between ASL and English. Regardless, I had one main goal for the project:
