@@ -1,6 +1,6 @@
-  https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/8d3778e4-661b-45a5-a3f0-06d28fdde9b4
-
-# ✌️ ASL ⭤ English Translation with MediaPipe, PointNet, ThreeJS and Semantic Search
+https://github.com/kevinjosethomas/sign-language-translation/assets/46242684/27868867-aaed-4213-b595-bcffb357479c
+  
+# ✌️ ASL ⭤ English Translation with MediaPipe, PointNet, ThreeJS and Embeddings
 
 American Sign Language (ASL) is a complete, natural language that exhibits the same linguistic complexities as spoken languages, including its own syntax, morphology, and grammar that significantly differ from English. However, most existing tools that aim to bridge ASL and English are often developed under the misconception that ASL is identical to English. These tools often prioritize the needs of hearing individuals, simply offering Text-to-Speech (TTS) and Speech-to-Text capabilities (STT). When Deafness is viewed as a "disability", most of these *translation* tools are simply developed to assist with the inability to hear, but they do not serve any purpose in actually translating between ASL and English. 
 
