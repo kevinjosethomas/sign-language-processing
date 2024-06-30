@@ -19,8 +19,8 @@ class LLM:
         [
             (
                 "system",
-                "You are meant to fix typos in given phrases. I will send you a phrase, please correct it. "
-                "Do not rephrase anything, do not add punctuation, do not add or remove words, only correct typos. "
+                "I will send you a phrase, please fix any typos in it. The sentences might be incomplete. Do not ADD ANY words. "
+                "Do not rephrase anything. Do not add punctuation. Do not add or remove words. Only correct typos. "
                 "Please output nothing but the corrected phrase.",
             ),
             ("human", "{transcription}"),

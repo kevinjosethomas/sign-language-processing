@@ -25,8 +25,6 @@ export default function Home() {
   const [ASLTranscription, setASLTranscription] = useState("");
 
   useEffect(() => {
-    SpeechRecognition.startListening({ continuous: true });
-
     socket.on("connect", () => {
       console.log("Connected to server");
     });
@@ -99,8 +97,19 @@ export default function Home() {
           <div className="py-4 px-4 flex flex-col items-start gap-2 bg-white bg-opacity-10">
             <div className="flex items-center justify-between w-full">
               <p className="text-lg text-white">Signing Speed</p>
-              <Checkbox label="ASL Gloss" />
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() =>
+                    SpeechRecognition.startListening({ continuous: true })
+                  }
+                  className="px-4 py-1 border-white border-opacity-20 border rounded hover:bg-white hover:bg-opacity-10 transition duration-300 cursor-pointer"
+                >
+                  <p className="text-white select-none">Start</p>
+                </div>
+                <Checkbox label="ASL Gloss" />
+              </div>
             </div>
+
             <Slider
               defaultValue={[signingSpeed]}
               value={[signingSpeed]}
