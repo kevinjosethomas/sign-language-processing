@@ -8,7 +8,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-import Camera from "../components/Camera";
+import Camera from "./components/Camera";
 import { Slider } from "@/ui/components/Slider";
 import Checkbox from "@/ui/components/checkbox";
 import Transcription from "../components/Transcription";
@@ -75,8 +75,8 @@ export default function Home() {
             <i className="fad fa-american-sign-language-interpreting text-xl text-white" />
             <h1 className="text-xl text-white">ASL Fingerspell</h1>
           </div>
+          <Camera />
           <div className="w-full h-full flex-col flex rounded">
-            <Camera />
             <Transcription content={ASLTranscription} />
             <div className="py-4 px-4 flex items-center justify-end gap-4 bg-white bg-opacity-10">
               <Checkbox label="Autocorrect" />
@@ -119,7 +119,6 @@ export default function Home() {
                   <Checkbox label="ASL Gloss" />
                 </div>
               </div>
-
               <Slider
                 defaultValue={[signingSpeed]}
                 value={[signingSpeed]}
