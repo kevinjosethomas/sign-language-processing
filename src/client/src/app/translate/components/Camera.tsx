@@ -3,16 +3,16 @@ import * as cam from "@mediapipe/camera_utils";
 import React, { useRef, useEffect } from "react";
 
 const Camera = () => {
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const contextRef = useRef(null);
+  const video = useRef(null);
+  const canvas = useRef(null);
+  const ctx = useRef(null);
 
   useEffect(() => {
-    contextRef.current = canvasRef.current.getContext("2d");
+    ctx.current = canvas.current.getContext("2d");
 
     const hands = new Hands({
       locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+        return `/landmarker/${file}`;
       },
     });
 
@@ -25,30 +25,25 @@ const Camera = () => {
 
     hands.onResults(onResults);
 
-    const camera = new cam.Camera(videoRef.current, {
+    const camera = new cam.Camera(video.current, {
       onFrame: async () => {
-        await hands.send({ image: videoRef.current });
+        await hands.send({ image: video.current });
       },
     });
     camera.start();
 
     function onResults(results) {
-      contextRef.current.clearRect(
-        0,
-        0,
-        canvasRef.current.width,
-        canvasRef.current.height
-      );
-      contextRef.current.drawImage(
+      ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
+      ctx.current.drawImage(
         results.image,
         0,
         0,
-        canvasRef.current.width,
-        canvasRef.current.height
+        canvas.current.width,
+        canvas.current.height
       );
       if (results.multiHandLandmarks) {
         for (const landmarks of results.multiHandLandmarks) {
-          drawLandmarks(contextRef.current, landmarks);
+          drawLandmarks(ctx.current, landmarks);
         }
       }
     }
@@ -58,8 +53,8 @@ const Camera = () => {
       ctx.strokeStyle = "#FF0000";
       ctx.lineWidth = 2;
       for (let i = 0; i < landmarks.length; i++) {
-        const x = landmarks[i].x * canvasRef.current.width;
-        const y = landmarks[i].y * canvasRef.current.height;
+        const x = landmarks[i].x * canvas.current.width;
+        const y = landmarks[i].y * canvas.current.height;
         ctx.beginPath();
         ctx.arc(x, y, 5, 0, 2 * Math.PI);
         ctx.fill();
@@ -69,8 +64,8 @@ const Camera = () => {
 
   return (
     <div>
-      <video ref={videoRef} style={{ display: "none" }}></video>
-      <canvas ref={canvasRef} width="960" height="720"></canvas>
+      <video ref={video} style={{ display: "none" }}></video>
+      <canvas ref={canvas} width="960" height="720"></canvas>
     </div>
   );
 };
