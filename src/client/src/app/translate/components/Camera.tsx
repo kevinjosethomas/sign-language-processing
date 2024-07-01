@@ -1,6 +1,8 @@
-import { Hands } from "@mediapipe/hands";
+import { Hand } from "kalidokit";
 import * as cam from "@mediapipe/camera_utils";
 import React, { useRef, useEffect } from "react";
+import { Hands, HAND_CONNECTIONS } from "@mediapipe/hands";
+import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
 
 const Camera = () => {
   const video = useRef(null);
@@ -43,21 +45,9 @@ const Camera = () => {
       );
       if (results.multiHandLandmarks) {
         for (const landmarks of results.multiHandLandmarks) {
+          drawConnectors(ctx.current, landmarks, HAND_CONNECTIONS);
           drawLandmarks(ctx.current, landmarks);
         }
-      }
-    }
-
-    function drawLandmarks(ctx, landmarks) {
-      ctx.fillStyle = "#00FF00";
-      ctx.strokeStyle = "#FF0000";
-      ctx.lineWidth = 2;
-      for (let i = 0; i < landmarks.length; i++) {
-        const x = landmarks[i].x * canvas.current.width;
-        const y = landmarks[i].y * canvas.current.height;
-        ctx.beginPath();
-        ctx.arc(x, y, 5, 0, 2 * Math.PI);
-        ctx.fill();
       }
     }
   }, []);

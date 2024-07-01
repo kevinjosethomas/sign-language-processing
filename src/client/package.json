@@ -23,6 +23,7 @@
     "@react-three/fiber": "^8.16.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "kalidokit": "^1.1.5",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "react": "^18",
