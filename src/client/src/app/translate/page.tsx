@@ -68,53 +68,53 @@ export default function Home() {
   }
 
   return (
-    <div className="w-screen h-screen p-16 flex items-center bg-neutral-950">
-      <div className="grid grid-cols-2 gap-1 bg-sky-500 rounded-xl w-full h-full overflow-hidden">
-        <div className="flex flex-col items-center bg-neutral-900 overflow-hidden">
-          <div className="h-16 w-full flex items-center justify-start gap-2 px-4 bg-neutral-900">
+    <div className="flex h-screen w-screen items-center bg-neutral-950">
+      <div className="grid h-full w-full grid-cols-2 gap-1 overflow-hidden rounded-xl bg-sky-500">
+        <div className="flex flex-col items-center overflow-hidden bg-neutral-900">
+          <div className="flex h-16 w-full items-center justify-start gap-2 bg-neutral-900 px-4">
             <i className="fad fa-american-sign-language-interpreting text-xl text-white" />
             <h1 className="text-xl text-white">ASL Fingerspell</h1>
           </div>
           <Camera />
-          <div className="w-full h-full flex-col flex rounded">
+          <div className="flex h-full w-full flex-col rounded">
             <Transcription content={ASLTranscription} />
-            <div className="py-4 px-4 flex items-center justify-end gap-4 bg-white bg-opacity-10">
+            <div className="flex items-center justify-end gap-4 bg-white bg-opacity-10 px-4 py-4">
               <Checkbox label="Autocorrect" />
               <div
                 onClick={clear}
-                className="px-4 py-1 border-white border-opacity-20 border rounded hover:bg-white hover:bg-opacity-10 transition duration-300 cursor-pointer"
+                className="cursor-pointer rounded border border-white border-opacity-20 px-4 py-1 transition duration-300 hover:bg-white hover:bg-opacity-10"
               >
-                <p className="text-white text-lg select-none">Clear</p>
+                <p className="select-none text-lg text-white">Clear</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center bg-neutral-900 overflow-hidden">
-          <div className="h-16 w-full flex items-center justify-between px-6 bg-neutral-900">
+        <div className="flex flex-col items-center overflow-hidden bg-neutral-900">
+          <div className="flex h-16 w-full items-center justify-between bg-neutral-900 px-6">
             <div className="flex items-center gap-2">
               <i className="fad fa-sign-language text-xl text-white" />
               <h1 className="text-xl text-white">English</h1>
             </div>
-            <i className="fas fa-cog text-white text-xl" />
+            <i className="fas fa-cog text-xl text-white" />
           </div>
-          <div className="w-full h-full flex-col flex">
+          <div className="flex h-full w-full flex-col">
             <Visualization
               signingSpeed={signingSpeed}
               getNextWord={getNextWord}
               currentWord={currentWord}
             />
             <Transcription content={transcript} />
-            <div className="py-4 px-4 flex flex-col items-start gap-2 bg-white bg-opacity-10">
-              <div className="flex items-center justify-between w-full">
+            <div className="flex flex-col items-start gap-2 bg-white bg-opacity-10 px-4 py-4">
+              <div className="flex w-full items-center justify-between">
                 <p className="text-lg text-white">Signing Speed</p>
                 <div className="flex items-center gap-4">
                   <div
                     onClick={() =>
                       SpeechRecognition.startListening({ continuous: true })
                     }
-                    className="px-4 py-1 border-white border-opacity-20 border rounded hover:bg-white hover:bg-opacity-10 transition duration-300 cursor-pointer"
+                    className="cursor-pointer rounded border border-white border-opacity-20 px-4 py-1 transition duration-300 hover:bg-white hover:bg-opacity-10"
                   >
-                    <p className="text-white select-none">Start</p>
+                    <p className="select-none text-white">Start</p>
                   </div>
                   <Checkbox label="ASL Gloss" />
                 </div>
