@@ -55,7 +55,7 @@ const Camera = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden rounded-xl outline outline-[5px] outline-blue-400">
       <video ref={video} style={{ display: "none" }}></video>
       <canvas ref={canvas} width="960" height="720"></canvas>
     </div>
