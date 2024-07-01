@@ -10,6 +10,8 @@ const Camera = () => {
   const ctx = useRef(null);
 
   useEffect(() => {
+    canvas.current.style.width = "100%";
+
     ctx.current = canvas.current.getContext("2d");
 
     const hands = new Hands({
@@ -53,7 +55,7 @@ const Camera = () => {
   }, []);
 
   return (
-    <div>
+    <div className="w-full">
       <video ref={video} style={{ display: "none" }}></video>
       <canvas ref={canvas} width="960" height="720"></canvas>
     </div>

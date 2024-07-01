@@ -5,8 +5,8 @@ import Expressive from "./components/Expressive";
 
 export default function Translate() {
   return (
-    <div className="flex h-screen w-screen items-center bg-neutral-950 p-16">
-      <div className="grid h-full w-full grid-cols-2 gap-1 overflow-hidden rounded-xl bg-sky-500">
+    <div className="flex h-screen w-screen items-center bg-white">
+      <div className="grid h-full w-full grid-cols-2 items-center justify-center rounded-xl">
         <Receptive />
         <Expressive />
       </div>
