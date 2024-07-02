@@ -7,3 +7,5 @@ venv/
 
 # Dataset Files
 data/
+
+__pycache__/

@@ -1,12 +1,12 @@
+import keras
 from keras import ops
-import tensorflow as tf
 
 LETTERS = "ABCDEFGHIKLMNOPQRSTUVWXY"
 
 
 class Classifier:
     def __init__(self):
-        self.model = tf.keras.models.load_model("model.keras")
+        self.model = keras.models.load_model("model.keras")
 
     def classify(self, points):
         predictions = self.model.predict(points, verbose=0)

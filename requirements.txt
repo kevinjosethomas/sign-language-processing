@@ -1,0 +1,12 @@
+flask
+flask-socketio
+keras
+langchain_openai
+mediapipe
+opencv-python
+pgvector
+psycopg2-binary
+python-dotenv
+sentence-transformers
+tensorflow
+tf-keras
