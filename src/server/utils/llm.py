@@ -15,19 +15,6 @@ class LLM:
         openai_api_key=os.getenv("OPENAI_API_KEY"),
     )
 
-    RECEPTIVE_PROMPT = ChatPromptTemplate.from_messages(  # The alphabets that the software often gets confused between are: A, S, T, N and M; G and H; D and I; F and W; P and Q; R and U.
-        [
-            (
-                "system",
-                "I will send you a phrase, please fix any typos in it. The sentences might be incomplete. Do not ADD ANY words. "
-                "Do not rephrase anything. Do not add punctuation. Do not add or remove words. Only correct typos. "
-                "Please output nothing but the corrected phrase.",
-            ),
-            ("human", "{transcription}"),
-        ]
-    )
-    RECEPTIVE_CHAIN = RECEPTIVE_PROMPT | llm
-
     EXPRESSIVE_PROMPT = ChatPromptTemplate.from_messages(
         [
             (
@@ -40,24 +27,6 @@ class LLM:
         ]
     )
     EXPRESSIVE_CHAIN = EXPRESSIVE_PROMPT | llm
-
-    @classmethod
-    def fix(cls):
-
-        Store.raw_word = ""
-        current_length = len(Store.raw_transcription)
-
-        raw_transcription = " ".join(Store.raw_transcription)
-        response = LLM.RECEPTIVE_CHAIN.invoke(
-            {
-                "transcription": raw_transcription,
-            }
-        )
-
-        Store.raw_transcription = (
-            response.content.strip().upper().split()
-            + Store.raw_transcription[current_length:]
-        )
 
     def gloss(self, transcription):
 

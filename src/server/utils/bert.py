@@ -17,8 +17,8 @@ class Bert:
 
         raw_transcription = " ".join(Store.raw_transcription).lower()
         print(raw_transcription)
-        corrected = cls.checker.correct(raw_transcription).strip().upper().split()
 
+        corrected = cls.checker.correct(raw_transcription).strip()
         print(corrected)
 
-        Store.corrected_transcription = corrected
+        Store.corrected_transcription = corrected.upper().split()
