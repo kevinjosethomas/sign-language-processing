@@ -6,7 +6,7 @@ LETTERS = "ABCDEFGHIKLMNOPQRSTUVWXY"
 
 class Classifier:
     def __init__(self):
-        self.model = keras.models.load_model("model4.keras")
+        self.model = keras.models.load_model("model5.keras")
 
     def classify(self, points):
         predictions = self.model.predict(points[:, :, :2], verbose=0)
