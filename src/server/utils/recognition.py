@@ -3,6 +3,7 @@ import threading
 import numpy as np
 
 from utils.llm import LLM
+from utils.bert import Bert
 from utils.store import Store
 from utils.landmarker import Landmarker
 from utils.classifier import Classifier
@@ -65,10 +66,12 @@ class Recognition:
         else:  # If no hand is detected, add a space
             if Store.raw_word:
                 Store.raw_transcription.append(Store.raw_word)
-                thread = threading.Thread(target=LLM.fix)
+                thread = threading.Thread(target=Bert.fix)
                 thread.start()
 
-        output = (" ".join(Store.raw_transcription) + " " + Store.raw_word).strip()
+        output = (
+            " ".join(Store.corrected_transcription) + " " + Store.raw_word
+        ).strip()
 
         different = output != Store.parsed
         if different:

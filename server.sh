@@ -2,4 +2,4 @@
 
 source venv/bin/activate
 cd src/server
-python server.py
+python3 server.py
