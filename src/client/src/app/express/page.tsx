@@ -48,10 +48,10 @@ export default function Home() {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-row gap-4">
-      <div className="py-4 px-4 flex flex-col items-start gap-6 w-80 bg-white bg-opacity-10">
+    <div className="flex h-screen w-screen flex-row gap-4">
+      <div className="flex w-80 flex-col items-start gap-6 bg-white bg-opacity-10 px-4 py-4">
         <p className="text-4xl font-semibold text-white">Express</p>
-        <div className="flex flex-col w-full gap-1">
+        <div className="flex w-full flex-col gap-1">
           <p className="text-lg text-white">Signing Speed</p>
           <Slider
             defaultValue={[signingSpeed]}
@@ -62,29 +62,29 @@ export default function Home() {
             step={1}
           />
         </div>
-        <div className="flex flex-col gap-1 w-full items-start justify-start">
+        <div className="flex w-full flex-col items-start justify-start gap-1">
           <p className="text-lg text-white">Duration</p>
           <input
             value={duration}
             placeholder="Enter duration (in seconds)"
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full focus:outline-none placeholder-white placeholder-opacity-50 text-sm text-white p-2 border bg-transparent border-white border-opacity-10 rounded"
+            className="w-full rounded border border-white border-opacity-10 bg-transparent p-2 text-sm text-white placeholder-white placeholder-opacity-50 focus:outline-none"
           />
         </div>
-        <div className="flex flex-col gap-1 w-full h-full items-start justify-start">
+        <div className="flex h-full w-full flex-col items-start justify-start gap-1">
           <p className="text-lg text-white">Content</p>
           <textarea
             value={text}
             placeholder="Enter text to sign"
             onChange={(e) => setText(e.target.value)}
-            className="w-full focus:outline-none placeholder-white placeholder-opacity-50 text-sm text-white p-2 h-full border bg-transparent border-white border-opacity-10 rounded"
+            className="h-full w-full rounded border border-white border-opacity-10 bg-transparent p-2 text-sm text-white placeholder-white placeholder-opacity-50 focus:outline-none"
           />
         </div>
         <div
-          className="bg-blue-600 hover:bg-blue-700 transition duration-300 flex items-center justify-center w-full py-2 rounded"
+          className="flex w-full items-center justify-center rounded bg-blue-600 py-2 transition duration-300 hover:bg-blue-700"
           onClick={() => socket.emit("E-REQUEST-ANIMATION", text)}
         >
-          <p className="text-white select-none">Render</p>
+          <p className="select-none text-white">Render</p>
         </div>
       </div>
       <Visualization
