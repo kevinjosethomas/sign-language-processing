@@ -17,7 +17,7 @@ This project is a prototype that enables translation between American Sign Langu
   </tr>
 </table>
 
-You can watch a full explanation of the project [here](https://youtu.be/uuPxMWQRoXc)
+You can watch a full explanation of the project [here](https://youtu.be/uuPxMWQRoXc). You can read my paper documenting the technical aspects on [arXiv](https://arxiv.org/abs/2408.09311).
 
 
 # Table of Contents
