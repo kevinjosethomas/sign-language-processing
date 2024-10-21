@@ -1,0 +1,20 @@
+\documentclass[../paper.tex]{subfiles}
+\begin{document}
+
+\section{Introduction}
+American Sign Language (ASL) is a complete, natural language that exhibits the same linguistic complexities as spoken languages, including its own syntax, morphology, and grammar that significantly differ from English. ASL is the primary language of many individuals in North America, and it is used by millions of people worldwide \cite{asl_stats}. Despite its prevalence, there remains a significant lack of resources and tools available to the public to facilitate communication between ASL and spoken language users.
+
+This paper presents an open-source American Sign Language fingerspell recognition and semantic pose retrieval system with two main components:
+
+\begin{itemize}
+    \item \textbf{Recognition:} Ability to interpret fingerspelling and express it as spoken English text
+    \item \textbf{Production:} Ability to interpret spoken English and express it as signing pose\footnote{A pose is a skeletal representation of a person's body} sequences
+\end{itemize}
+
+To serve as a stepping stone towards more real-world sign language translation systems, the system is designed to be modular and adaptable. The two components can be used independently or together, and the system can be implemented into various existing applications through a WebSocket API. Similarly, the system is designed to be accessible in real-world scenarios, where lighting conditions, skin tones, hand sizes, and distances from the camera can vary significantly. All the code and models are open-source and available on GitHub\footnote{All code and models are available at \url{https://github.com/kevinjosethomas/sign-language-processing}}.
+
+This documented approach utilizes a combination of existing technologies and custom models to achieve the desired functionality. The recognition component provides two alternative models to translate fingerspelling. The first model is a custom 2D convolutional classification model built for simplicity and speed. The second model is an implementation of the 3D PointNet \cite{PointNet} architecture, which is more complex but provides better accuracy. Classified letters are synthesized into spoken English text using rule-based algorithms, and syntactical misclassifications are corrected using a pretrained BERT model \cite{Neuspell}. The production component uses a large language model (LLM) to translate spoken English text to ASL gloss\footnote{ASL gloss is a system of representing ASL signs and non-manual markers in written form}. Then, it uses semantic search to find corresponding ASL poses for each gloss, which are then synthesized into a stitched ASL pose sequence.
+
+Furthermore, we package the recognition and production components into a WebSocket API that can be individually accessed by any user interface. We also develop an open-source user-friendly interface that allows for users to interact with both the modules in real-time. 
+
+\end{document}

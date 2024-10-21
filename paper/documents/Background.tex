@@ -1,0 +1,37 @@
+\documentclass[../paper.tex]{subfiles}
+\begin{document}
+
+\section{Background}
+
+Sign language processing (SLP) is a field of research that focuses on the development of technologies that can understand and generate sign language. With the rise of novel deep learning and computer vision technology, the field of SLP has seen significant advancements in recent years. Sign language processing can be segmented into two main categories: recognition and production. Sign language recognition focuses on the understanding of sign language, while sign language production focuses on the generation of sign language \cite{SLP}. In this section, we provide an overview of the current state-of-the-art in both receptive and expressive SLP.
+
+\subsection{Recognition}
+
+There are multiple components to the reception of sign language, including fingerspell recognition, sign language detection, sign language segmentation, and sign language recognition \cite{SLP}. Fingerspell recognition involves recognizing individual ASL letters in videos or images. Sign language detection involves recognizing whether a given video or image contains sign language. Sign language segmentation involves isolating different signs in a given video. Sign language recognition refers to the process of labeling signs in videos. While all tasks are essential to the overarching goal of sign language translation, it is important to distinguish between them.
+
+\subsubsection*{Fingerspell Recognition}
+\citet{SpellingItOut} developed an ASL fingerspelling recognition interface that utilizes a Microsoft Kinect device to capture real-time depth and appearance images. They found that classification using both depth and appearance images outperformed classification using only depth images. \citet{FingerspellingInTheWild} used videos from uncontrolled environments to train a fingerspell recognition model that utilized an iterative attention mechanism to improve performance. Furthermore, they utilized this mechanism to create two new data sets of annotated fingerspelling videos in the wild \cite{chicago2,chicago1}.
+
+\subsubsection*{Sign Language Detection}
+Sign language detection is the binary classification task of determining whether a given video features someone signing. With the goal of spotlighting signers when they sign in video conferencing software, \ \citet{SignLanguageDetection} utilized optical flow features from OpenPose human pose estimation to train a binary classifier. They produced results of 87\%-91\% accuracy with a per-frame inference time of only 350–3500\textit{\textmu}s. \citet{SignLanguageDetectionInTheWild} used a multi-layer recurrent neural network and a 2-stream convolutional neural network to analyze video and motion data for sign language detection. They achieved an accuracy of 87.67\% which outperformed the previous state-of-the-art baseline model by 18.44\%.
+
+\subsubsection*{Sign Language Segmentation}
+\citet{SignLanguageSegmentation} described a novel approach to sign language segmentation, focusing on segmenting individual signs and phrases. They introduced a method that incorporated optical flow features to better capture phrase boundaries. \citet{TemporalSignLanguageSegmentation} developed a 3D convolutional neural network to identify temporal boundaries between signs in continuous sign language videos.
+
+\subsubsection*{Sign Language Translation}
+\citet{PopSign} developed PopSign ASL, the first sign language translation system available to the public. It featured an LSTM model that could translate individual signs into text with an accuracy of 84.2\%. Furthermore, they created a data set of 250 isolated signs, comprising over 210,000 individual videos from 47 different signers.
+
+
+\subsection{Production}
+Similar to recognition, sign language production is often broken down to multiple sub-tasks to achieve the desired functionality. Current sign language production systems follow the pipeline of text-to-gloss-to-pose-to-video \cite{SLP}. 
+
+\subsubsection*{Text to Gloss}
+\citet{Text2Gloss2Pose2Video} explored three different methods of translating spoken English text to ASL gloss: a lemmatizer, a rule-based word reordering and dropping system, and a neural machine translation model. In their work, they opted for the rule-based word reordering system. \citet{TransformerText2Gloss} integrated syntactic information from a dependency parser into word embeddings to develop a syntax-aware transformer model to translate spoken English text to ASL gloss. They found that incorporating syntactic data resulted in improved translational accuracy and performance.
+
+\subsubsection*{Gloss to Pose}
+\citet{Gloss2Pose} built a lookup-table which mapped sign glosses to 2D skeletal poses, allowing them to play back sign poses from a given gloss. \citet{Text2Gloss2Pose2Video} used MediaPipe Holistic to extract body pose estimations from sign language datasets, and then stitched poses together to create poses from given glosses.
+
+\subsubsection*{Pose to Video}
+\citet{Text2Gloss2Pose2Video} used a Pix2Pix model and a ControlNet model to generate videos of people signing from given poses. They found that ControlNet with AnimateDiff outperformed the Pix2Pix model in terms of realism and quality of generated videos.
+
+\end{document}

@@ -1,0 +1,13 @@
+\documentclass[../paper.tex]{subfiles}
+\begin{document}
+
+\section{Interface}
+To demonstrate the model's capabilities in real-world settings, we present a demo interface for fingerspell recognition and semantic pose retrieval. The interface consists of two segments: a server and a client. The server provides a modular implementation of the recognition and production components that is accessible via a WebSocket API. The client is a web application that serves as a user-friendly interface for interacting with the two components.
+
+\subsection{Server}
+The server is implemented in Python using the Flask web framework. It provides a WebSocket API that allows clients to interact with the recognition and production components. The server is designed to be modular, allowing for easy integration with other existing applications. For receptive sign language inference, the server captures video streams, processes the frames using the recognition model, and emits the fingerspelled letters to the client through WebSocket messages. This architecture allows for real-time fingerspell recognition. For sign language production, the server receives spoken English text from the client, semantically retrieves and stitches the corresponding poses, and returns the corresponding ASL poses. This open-source API can be used to build a variety of applications, such as ASL translation systems, educational tools, and accessibility applications. See \autoref{sec:future_work} for potential applications.
+
+\subsection{Client}
+The client is a web application built with NextJS that provides a user-friendly interface for interacting with the server. It uses the WebSocket API provided by the server to communicate with the recognition and production components. For the fingerspell recognition component, the client displays a webcam stream which is annotated with recognized fingerspelling letters. It receives transcribed words from the server and displays it on the left half of the screen in real-time. For the pose production component, the client transcribes spoken English using the browser's built-in SpeechRecognition API\footnote{Audio transcription can be improved by using technology like OpenAI Whisper \cite{whisper}}, and sends the transcribed text to the server via WebSocket messages. The server then processes the text using the pose retrieval component and returns the corresponding ASL poses, which are animated on the right half of the screen using ThreeJS. The open-source \href{https://github.com/kevinjosethomas/sign-language-processing}{GitHub repository} features the full implementation and many examples of the demo interface.
+
+\end{document}

@@ -1,0 +1,18 @@
+\documentclass[../paper.tex]{subfiles}
+\begin{document}
+
+\section{Future Work}
+\label{sec:future_work}
+
+Sign language processing is a rapidly evolving field, and there is a growing interest in creating larger data sets and continuous sign language recognition systems that can handle the complexity and variability of natural sign language. This innovation will continue to be driven by advances in computer vision, machine learning, and natural language processing. In this section, we discuss potential future directions for expanding the current model and its applications.
+
+\subsection*{Continuous Sign Language Recognition}
+The current model is limited to recognizing individual fingerspelled letters. A natural extension is to recognize continuous ASL signs. This would require a more sophisticated model, such as an LSTM or a transformer model, that can capture the temporal dynamics of sign language. An interesting direction would be to explore the use of multimodal models that utilize parameter search to narrow down potential signs based on the hand placement, orientation, and other ASL parameters. By utilizing growing sign language corpora like ASL-Lex \cite{asllex}, models can be trained to identify parameters from poses and use them to reduce the search space and improve the accuracy of classification. Approaches could also project poses into an embedding space and use similarity metrics to classify signs. 
+
+\subsection*{Natural Sign Language Production}
+Another important direction is to improve the sign language production component's ability to express the more complex aspects of ASL, such as facial expressions, lexicalized signs, directional signs, and other non-manual markers. Additionally, unlike generating poses, an optimal model should be able to produce human-like signing motions that are fluid, natural, and expressive. One potential approach would be to use kinematic models to rig and control a virtual avatar's motions based on the output of the production module. Another approach would be to use generative diffusion models to produce photo-realistic humans signing based on the input text.
+
+\subsection*{Consumer Applications}
+While academia has made significant progress in sign language recognition and translation, there is a gap between research and real-world applications. As sign language processing technology matures, it is important to consider how it can be integrated into consumer applications and be deployed in the real-world. One potential implementation of the documented pose retrieval module is a Chrome extension that automatically embeds the sign language avatar in YouTube videos to provide ASL translations instead of relying on captions. Another example is a video-conferencing extension or webcam client that provides real-time ASL production for individuals who are speaking. While most research is still in the early stages of development and far from human parity, they already pose significant potential to improve accessibility.
+
+\end{document}

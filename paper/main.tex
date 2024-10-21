@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+
+\usepackage{style}
+\usepackage{times}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{subfiles}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,anchorcolor=blue,citecolor=blue]{hyperref}
+
+\def\sectionautorefname{Section}
+
+\title{An Open-Source American Sign Language Fingerspell Recognition and Semantic Pose Retrieval Interface}
+
+\author{Kevin Jose Thomas \\
+  Burnaby South S. S \\
+  Burnaby, BC, Canada\\
+  {\tt kevin.jt2007@gmail.com} \\
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  This paper introduces an open-source interface for American Sign Language fingerspell recognition and semantic pose retrieval, aimed to serve as a stepping stone towards more advanced sign language translation systems. Utilizing a combination of convolutional neural networks and pose estimation models, the interface provides two modular components: a recognition module for translating ASL fingerspelling into spoken English and a production module for converting spoken English into ASL pose sequences. The system is designed to be highly accessible, user-friendly, and capable of functioning in real-time under varying environmental conditions like backgrounds, lighting, skin tones, and hand sizes. We discuss the technical details of the model architecture, application in the wild, as well as potential future enhancements for real-world consumer applications.
+\end{abstract}
+
+\section*{Acknowledgements}
+As a hearing ASL student with elementary proficiency, I recognize that my perspective as a hearing person is limited. My role has been to listen carefully and integrate feedback from the Deaf community, and I have done my best to approach this project with a mindset of learning and understanding. This project would not have been possible without the active involvement and advice from ASL experts who have generously shared their insights.
+
+It is also important to note that fingerspelling is only one aspect of ASL\footnote{Fingerspelling is the method of sign language where words are individually spelled out using hand movements. Fingerspelling accounts for up to 35\% of expressed ASL \cite{fingerspelling_stats}}, and the system does not aim to replace the richness and complexity of ASL grammar and syntax. Instead, it is designed to be a stepping stone towards more advanced ASL translation systems.
+
+\subfile{documents/Introduction.tex}
+\subfile{documents/Background.tex}
+\subfile{documents/Method.tex}
+\subfile{documents/Recognition.tex}
+\subfile{documents/Production.tex}
+\subfile{documents/Interface.tex}
+\subfile{documents/FutureWork.tex}
+\subfile{documents/Conclusion.tex}
+
+\bibliographystyle{plainnat}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0pt}
+
+\bibliography{refs}
+
+\end{document}
+
+\typeout{get arXiv to do 4 passes: Label(s) may have changed. Rerun}
